@@ -23,7 +23,7 @@
 
 <body>
 
-    <header class="container-fluid bg-light shadow-2 pb-2 pt-2" id="main-header">
+    <header class="container-fluid bg-light shadow-1 pb-2 pt-2 sticky-top d-none d-md-block d-lg-block d-xl-block" id="main-header">
 
         <div class="container">
             <div class="row">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-4 pt-2rem text-center text-md-left">
                     <p class="h5 mb-0">
-                        <span class="font-weight-bold text-primary">AGENDA</span> TU CITA
+                        <span class="font-weight-bold text-primary">BIENVENIDO</span>
                     </p>
                 </div>
                 <div class="col-md-5 pt-3 pt-lg-4 text-center text-md-right">
@@ -53,10 +53,40 @@
 
     </header>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-1 sticky-top d-block d-sm-block d-md-none">
+        <a href="bienvenida.html">
+        <img class="img-fluid" width="250px" src="img/logo-linea.png" alt="logo">
+        </a>
+
+        <em class="fas fa-circle fa-xs pink animate-flicker-config animate-flicker"></em>
+        <button id="nav-toggle" class="navbar-toggler custom-toggler collapsed nav-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+        </button>
+        <div class="collapse navbar-collapse menu-sticky-mobile" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Home")">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Cita")">Agendar cita</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Chequeo")">Agendar chequeo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="alogoutmini">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+
 
     <main class="container">
 
         <!-- BOXES COLOR -->
+        <div class="d-none d-md-block d-lg-block d-xl-block">
         <section class="row text-white links-white text-center font-weight-bold">
 
             <div class="col-md-3 pt-5 pb-4 bg-box-color-1">
@@ -94,6 +124,7 @@
             </div>
 
         </section>
+        </div>
         <!-- /BOXES COLOR -->
         <!-- BOX PROFILE -->
 
@@ -173,7 +204,7 @@
         _appcitas.IDENTNO =@Session["IDENTNO"];
         $(document).ready(
             function () {
-                $("#alogout").click(function () {
+                $("#alogout, #alogoutmini").click(function () {
                     $("#modalLogout").modal('show');
                 });
             });
@@ -185,6 +216,10 @@
 
         $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
             alert("Se ha producido un error, intente mas tarde.");
+        });
+
+        document.querySelector( "#nav-toggle" ).addEventListener( "click", function() {
+            this.classList.toggle( "active" );
         });
     </script>
     @RenderSection("scripts", required: false)

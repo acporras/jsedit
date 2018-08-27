@@ -12,8 +12,17 @@
         border-radius: 3px;
     }
 </style>
-<section class="row pt-5 pb-5">
-    <div class="col-md-12 reservar-text pl-10">
+<section class="row pb-5">
+    
+    <div class="col-md-12 text-center d-block d-sm-block d-md-none pt-5 title__content-mobile">
+        <p class="title--mobile text-center"><span class="font-weight-bold text-primary">BIENVENIDO</span></p>
+            <p class="mb-0 d-inline text-center">
+                Hola,
+                <span class="text-primary"> @Session["nombreUsuario"] </span>
+            </p>
+    </div>
+
+    <div class="col-md-12 reservar-text pl-10 d-none d-md-block d-lg-block d-xl-block">
         <p class="pl-10">
             <span class="font-weight-bold text-primary">
                 @Session["nombreUsuario"]
