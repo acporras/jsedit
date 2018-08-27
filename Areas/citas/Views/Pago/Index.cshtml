@@ -1,0 +1,84 @@
+﻿
+@model DAL.JockeySalud.CitaModel.Cita
+@using JockeySaludApplication.Utils;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/citas/Views/Shared/_Layout.cshtml";
+}
+
+<main class="container">
+    <!-- FORMS -->
+    <section class="row mt-10">
+
+        <!-- Title -->
+        <div class="col-md-12">
+            <div class="row text-white pt-4 pb-4 bg-secondary">
+                <div class="col-md-2 text-center">
+                    <img height="50px" src="~/img/icons/family-room.png" alt="family-room">
+                </div>
+                <div class="col-md-10">
+                    <p class="mb-0 font-weight-bold">
+                        AFÍLIATE AHORA A JOCKEY SALUD FAMILIA
+                    </p>
+                    <p class="mb-0">
+                        Y OBTÉN GRANDES BENEFICIOS
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Title -->
+        <!-- FORM 1 -->
+        <div class="col-md-12">
+            <form class="row combos b-gray-1 text-center pt-5 pb-5 mb-5">
+                <div class="col-md-12 pb-4">
+                    <p class="text-secondary font-weight-bold">
+                        Resumen de la transacción:
+                    </p>
+                </div>
+                <div class="col-md-5 ml-auto text-left">
+                    <p class="mb-2">
+                        <span class="font-weight-bold text-primary">DETALLES</span>
+                    </p>
+                    <p><strong>Especialidad: </strong>@Model.StrEspe</p>
+                    <p><strong>Cobertura: </strong>@Model.Cobertura</p>
+                    <p><strong>Médico: </strong>@(Model.Nombre + " " + Model.ApellidoPat + " " + Model.ApellidoMat)</p>
+
+                </div>
+                <div class="col-md-5 mr-auto text-left">
+                    <p class="mb-2">
+                        <span class="font-weight-bold text-primary"> &nbsp; </span>
+                    </p>
+                    <p><strong>Fecha: </strong>@Model.StrDia @Model.StrFecha</p>
+                    <p><strong>Hora: </strong>@string.Format("{0:HH:mm:ss tt}", DateTime.Parse(Model.StrFechaHoraIni))</p>
+                </div>
+            </form>
+            <div class="col-md-5 ml-auto">
+                <h4>Total: S/. @Html.DisplayFor(model => model.MontoPago)</h4>
+                <form method="post" action="@ViewBag.urlPayu">
+                    <input name="merchantId" type="hidden" value="@Config.MERCHANTID">
+                    <input name="accountId" type="hidden" value="@Config.ACCOUNTID">
+                    <input name="description" type="hidden" value="@ViewBag.descripcion">
+                    <input name="referenceCode" type="hidden" value="@Model.referenceCode">
+                    <input name="amount" type="hidden" value="@Model.MontoPago">
+                    <input name="tax" type="hidden" value="0">
+                    <input name="taxReturnBase" type="hidden" value="0">
+                    <input name="currency" type="hidden" value="@Config.CURRENCY">
+                    <input name="signature" type="hidden" value="@Model.Signature">
+                    <input name="test" type="hidden" value="@Config.TEST">
+                    <input name="buyerEmail" type="hidden" value="@Model.Email">
+                    <input name="responseUrl" type="hidden" value="@ViewBag.urlRespuesta">
+                    <input name="confirmationUrl" type="hidden" value="@ViewBag.urlConfirmacion">
+                    <input name="extra1" type="hidden" value="@(Model.CITAID +"-cita")" />
+                    <button type="submit" class="btn btn-secondary btn-block">
+                        COMPRAR AHORA
+                    </button>
+                    <br />
+                </form>
+
+            </div>
+
+        </div>
+        <!-- /FORM 1 -->
+    </section>
+</main>

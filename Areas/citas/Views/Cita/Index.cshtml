@@ -1,0 +1,94 @@
+﻿@model DAL.JockeySalud.CitaModel.Cita
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/citas/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BOX PROFILE -->
+<section class="row pt-5 pb-5">
+
+    <div class="col-md-12">
+        <p class="mb-1">
+            Por favor completa los siguientes datos en el formulario para reservar una cita.
+        </p>
+        <p class="font-weight-bold">
+            Recuerda que puede agendar su cita para el presente mes.
+        </p>
+    </div>
+
+    <div class="col-md-12 text-agenda-cita pl-10">
+        <p class="pl-5">
+            <span class="font-weight-bold text-primary">
+                AGENDA
+            </span>
+            TU CITA
+        </p>
+    </div>
+
+    <div class="reservar-icon-left rounded-circle">
+        <img class="rounded-circle" width="100px" height="100px" src="~/img/icons-color/care-7.png" alt="businessman.png">
+    </div>
+
+
+    <div class="col-md-12 pt-9 pb-9 small item-round-3 bg-gray-light position-relative">
+
+        <form class="row text-center justify-content-center" action="@Url.Action("Doctores","Cita")" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label class="text-primary font-weight-bold" for="especialidad">
+                        Seleccione la especialidad
+                    </label>
+                    @Html.DropDownListFor(model => model.StrEspe, new SelectList(ViewBag.especialidades, "Descripcion", "Descripcion"), "Selecciona", new { @class = "form-control select-round-gray", id = "especialidad" })
+
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label class="text-primary font-weight-bold" for="cobertura">
+                        Seleccione su cobertura
+                    </label>
+                    <select class="form-control select-round-gray" id="Cobertura" name="Cobertura">
+                        <option class="text-primary" value="">Selecciona</option>
+                        <option>Pacifico EPS</option>
+                        <option>Pacifico Seguros</option>
+                        <option>Rímac EPS</option>
+                        <option>Rímac Seguros</option>
+                        <option>Mapfre EPS</option>
+                        <option>Mapfre Seguros</option>
+                        <option>Positiva EPS</option>
+                        <option>Jockey Salud Familia</option>
+                    </select>
+                </div>
+
+                <p class="text-right pt-4">
+
+                    <button class="btn btn-primary btn-round" type="submit"> Siguiente</button>
+                </p>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("form").validate({
+                rules: {
+                    StrEspe: "required",
+                    Cobertura: "required"
+                },
+                messages: {
+                    StrEspe: "*Campo requerido",
+                    Cobertura: "*Campo requerido"
+                }
+            });
+        });
+    </script>
+}
+<!-- /BOX PROFILE -->

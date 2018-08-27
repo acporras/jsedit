@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f445480383f349be8441661cb675402f" Name="Diagrama1" ZoomLevel="64">
+        <EntityTypeShape EntityType="JockeySaludModel.Beneficiario" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JockeySaludModel.Plan" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JockeySaludModel.Titular" Width="2.875" PointX="7.125" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JockeySaludModel.Ubigeo" Width="1.5" PointX="3.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JockeySaludModel.Usuario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="JockeySaludModel.AJSBENEF_AJSPLAN_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="JockeySaludModel.AJSBENF_AJSTITULAR_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="JockeySaludModel.AJSBENF_AJSUBIGEO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="JockeySaludModel.AJSTITU_AJSPLAN_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="JockeySaludModel.AJSTITU_AJSUBIGEO_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="JockeySaludModel.PAYU" Width="2" PointX="12.5" PointY="2.25" />
+        <AssociationConnector Association="JockeySaludModel.AJSPAYU_AJSTITULAR_FK" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

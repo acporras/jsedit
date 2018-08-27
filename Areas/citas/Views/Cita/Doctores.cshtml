@@ -1,0 +1,136 @@
+﻿@model DAL.JockeySalud.CitaModel.Cita
+@{
+    ViewBag.Title = "Doctores";
+    Layout = "~/Areas/citas/Views/Shared/_Layout.cshtml";
+}
+<!-- BOX BG -->
+<section class="row text-white" style="background: url(@Url.Content("~/img/barra-reservar.png")) no-repeat; background-size: cover; min-height: 120px;">
+
+    <div class="col-md-2 text-center">
+        <img class="img-fluid" src="~/img/reservar/doctora.png" alt="doctora">
+    </div>
+    <div class="col-md-10">
+        <p class="pt-5 h5">
+            <small class="font-weight-bold">
+                HOLA ISRAEL,
+            </small>
+            <small>
+                HEMOS ENCONTRADO LOS SIGUIENTES DOCTORES SEGÚN TU BÚSQUEDA
+            </small>
+        </p>
+    </div>
+
+</section>
+<!-- /BOX BG -->
+<!-- Doctors -->
+<form class="row text-center justify-content-center" action="@Url.Action("Detalle","Cita")" method="post">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.IntCodEspe)
+    @Html.HiddenFor(model => model.StrEspe)
+    @Html.HiddenFor(model => model.Cobertura)
+    <input type="hidden" value="1" id="page" />
+
+    <input type="hidden" value="" id="Nombre" name="Nombre" />
+    <input type="hidden" value="" id="ApellidoPat" name="ApellidoPat" />
+    <input type="hidden" value="" id="ApellidoMat" name="ApellidoMat"/>
+    <section id="medicos" class="row pt-5 pb-5 text-center">
+       
+        @if (ViewBag.medicos.Count > 0)
+    {
+        <div class="col-md-12">
+            <p class="font-weight-bold mb-5">
+                Selecciona a tu médico
+            </p>
+        </div>
+    foreach (var item in ViewBag.medicos)
+    {
+        <div class="col-md-2 col-sm-4 select-medico @(ViewBag.strmedico==item.MedicoID.ToString()?"medico-active":"")">
+            <img class="rounded-circle b-primary-1 img-fluid p-2 " height="150px" width="150px" src="~/img/reservar/doctor.jpg" alt="doctor">
+            
+           
+            <p class="pt-2 h7 font-weight-bold">
+                @item.Nombre
+                <span class="text-primary" id="namemed">  @(item.ApellidoPat + " " + item.ApellidoMat )</span>
+
+            </p>
+            <input type="hidden" value="@item.MedicoID" id="id" />
+            <input type="hidden" value="@item.Nombre" id="NombreMED" />
+            <input type="hidden" value="@item.ApellidoPat" id="ApellidoPatMED" />
+            <input type="hidden" value="@item.ApellidoMat" id="ApellidoMatMED" />
+        </div>
+}
+
+
+    <div class="col-md-12 text-center mt-5 mb-5" id="contbtnload">
+        <a class="btn btn-primary btn-round" id="loadmedicos" href="#">Cargar más médicos ...</a>
+    </div>
+}
+else
+{
+    <div class="col-md-12">
+        <p class="mb-1">
+            En el momento no tenemos médicos disponibles.
+        </p>
+        <p class="font-weight-bold">
+            Consulte mas tarde.
+        </p>
+    </div>
+    <div class="col-md-12 text-center mt-5 mb-5" id="contbtnload">
+        <a class="btn btn-primary btn-round" href="@Url.Action("Index")">Volver</a>
+    </div>
+}
+
+        <input type="hidden" value="" id="StrCodMed" name="StrCodMed" />
+    </section>
+    <!-- /Doctors -->
+    <!-- Fecha -->
+    <section class="row">
+
+        <div class="col-md-12 text-center">
+            <p>
+                Luego de seleccionar el médico de tu preferencia, <strong>selecciona la fecha</strong>
+            </p>
+        </div>
+
+        <div class="col-md-12 col-md-offset-4 d-flex justify-content-center pt-3 pb-4 reservar-datepicker">
+            <div id="datepicker" data-date="today"></div>
+            <br />
+            <input type="hidden" id="StrFecha" name="StrFecha">
+
+        </div>
+
+        <div class="col-md-12 text-center mb-10">
+            <span id="ltserror"></span>
+            <button class="btn btn-primary btn-round" type="submit"> CONTINUAR</button>
+        </div>
+
+    </section>
+</form>
+<!-- /Fecha -->
+
+@section Scripts {
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="~/js/App/citas/doctores.js?v=@JockeySaludApplication.Utils.Config.versionfiles"></script>
+    <script>
+        var selecmedico='@ViewBag.strmedico';
+        $('#datepicker').datepicker({
+            dateFormat: 'dd-MM-yyyy',
+            language: 'es',
+            daysOfWeekDisabled: [0,1,2,3,4,5,6]
+        });
+
+        $('#datepicker').datepicker();
+
+        $('#datepicker').on('changeDate', function () {
+            $('#StrFecha').val(
+                $('#datepicker').datepicker('getFormattedDate')
+            );
+        });
+
+
+        $(document).ready(page.init);
+    </script>
+
+}

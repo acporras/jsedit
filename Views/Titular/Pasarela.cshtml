@@ -1,0 +1,191 @@
+﻿@model JockeySaludApplication.Model.Titular
+@using JockeySaludApplication.Utils;
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pasarela - Jockey Salud Familia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jockey Salud Familia" />
+    <meta name="keywords" content="Jockey Salud Familia" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.min.css">
+</head>
+<body>
+
+    <header class="container-fluid bg-primary" id="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto text-light" style="background:url(@Url.Content("~/img/barra-header.png")) no-repeat center center; background-size: cover;">
+                    <p class="m-2 small pt-2 pb-2">
+                        Comunícate con nuestra Central de Citas al (01) 7 123 456 y atiéndete con nosotros
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-dark container">
+                <a class="navbar-brand" href="@Url.Content("~/")">
+                    <img class="img-fluid" width="150px" src="~/img/logo.png" alt="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <a class="btn btn-light btn-sm item-round-1 text-primary font-weight-bold hover-shadow-2 ml-auto" href="iniciar-sesion.html">
+                        <i class="far fa-hand-point-up"></i>
+                        SEPARA TU CITA
+                    </a>
+                    <!-- nav 2 -->
+                    <!--
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link header-nav-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    -->
+                    <!-- /nav 2 -->
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- FORMS -->
+        <section class="row mt-10">
+
+            <!-- Title -->
+            <div class="col-md-12">
+                <div class="row text-white pt-4 pb-4 bg-secondary">
+                    <div class="col-md-2 text-center">
+                        <img height="50px" src="~/img/icons/family-room.png" alt="family-room">
+                    </div>
+                    <div class="col-md-10">
+                        <p class="mb-0 font-weight-bold">
+                            AFÍLIATE AHORA A JOCKEY SALUD FAMILIA
+                        </p>
+                        <p class="mb-0">
+                            Y OBTÉN GRANDES BENEFICIOS
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Title -->
+            <!-- FORM 1 -->
+            <div class="col-md-12">
+                <form class="row combos b-gray-1 text-center pt-5 pb-5 mb-5">
+                    <div class="col-md-12 pb-4">
+                        <p class="text-secondary font-weight-bold">
+                            Resumen de la transacción:
+                        </p>
+                    </div>
+                    <div class="col-md-5 ml-auto text-left">
+                        <p>Nombre: @Html.DisplayFor(model => model.Nombre)</p>
+                        <p>Apellido Paterno: @Html.DisplayFor(model => model.ApellidoPaterno)</p>
+                        <p>Apellido Materno: @Html.DisplayFor(model => model.ApellidoMaterno)</p>
+                        <p>Email: @Html.DisplayFor(model => model.Email)</p>
+                        <p>Teléfono fijo o celular: @Html.DisplayFor(model => model.TelefonoFijo)</p>
+                        <p>DNI: @Html.DisplayFor(model => model.NumeroDocumento)</p>
+                        <p>Fecha de Nacimiento: @string.Format("{0:dd/MM/yyyy}", Model.FechaNacimiento)</p>
+                    </div>
+                    <div class="col-md-5 mr-auto text-left">
+                        <p>Sexo: @((Model.Sexualidad == "M") ? "Masculino" : "Femenino")</p>
+                        <p>Departamento: @Model.Departamento</p>
+                        <p>Provincia: @Model.Provincia</p>
+                        <p>Distrito: @Model.Distrito</p>
+                        <p>Dirección: @Html.DisplayFor(model => model.Direccion)</p>
+                        <p>Plan:@Html.DisplayFor(model => model.Plan.Nombre)</p>
+                        @{int counter = 1;}
+                        @foreach (var bene in Model.Beneficiarios)
+                        {
+                            <p>Beneficiario @(counter): @Html.DisplayFor(model => bene.Plan.Nombre)</p>
+                            counter++;
+                        }
+                    </div>
+                </form>
+                <div class="col-md-5 ml-auto">
+                    <h4>Total: S/. @Html.DisplayFor(model => model.MontoPago)</h4>
+                    <form method="post" action="@ViewBag.urlPayu">
+                        <input name="merchantId" type="hidden" value="@Config.MERCHANTID">
+                        <input name="accountId" type="hidden" value="@Config.ACCOUNTID">
+                        <input name="description" type="hidden" value="@(String.Format(" {0} {1} {2}", Model.Nombre, Model.ApellidoPaterno, Model.ApellidoMaterno))">
+                        <input name="referenceCode" type="hidden" value="@Model.referenceCode">
+                        <input name="amount" type="hidden" value="@Model.MontoPago">
+                        <input name="tax" type="hidden" value="0">
+                        <input name="taxReturnBase" type="hidden" value="0">
+                        <input name="currency" type="hidden" value="@Config.CURRENCY">
+                        <input name="signature" type="hidden" value="@Model.Signature">
+                        <input name="test" type="hidden" value="@Config.TEST">
+                        <input name="buyerEmail" type="hidden" value="@Model.Email">
+                        <input name="responseUrl" type="hidden" value="@ViewBag.urlRespuesta">
+                        <input name="confirmationUrl" type="hidden" value="@ViewBag.urlConfirmacion">
+                        <input name="extra1" type="hidden" value="@Model.Pk" />
+                        <button type="submit" class="btn btn-secondary btn-block">
+                            COMPRAR AHORA
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+            <!-- /FORM 1 -->
+        </section>
+        <!-- /FORMS -->
+
+    </main>
+    <footer class="container-fluid bg-primary text-white text-center mt-5 pt-5 pb-4">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="small text-left links-white">
+                        Jockey Salud Copyright 2018 - Todos los derechos reservados.<br>
+                        Desarrollado por <a target="_blank" href="http://www.cliclatam.com" title="Diseño y desarrollo Web">CLIC Perú</a>
+                    </p>
+                </div>
+                <div class="col-md-6 text-right">
+
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://www.facebook.com/JockeySalud">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://twitter.com/JockeySalud">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://jockeysalud.wordpress.com/">
+                        <i class="fab fa-wordpress" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Jquery, Boostrap and Popper Minified -->
+    <script src="~/js/core/core-dist.js"></script>
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
+    <script>
+        $('#f_nacimiento').datepicker({
+            dateFormat: 'dd-MM-yyyy',
+            language: 'es',
+            startView: "decade"
+        });
+    </script>
+</body>
+</html>
+

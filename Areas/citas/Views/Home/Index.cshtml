@@ -1,0 +1,166 @@
+﻿@model DAL.JockeySalud.CitaModel.UsuarioAdicional
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/citas/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .input-sm {
+        height: 30px;
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+</style>
+<section class="row pt-5 pb-5">
+    <div class="col-md-12 reservar-text pl-10">
+        <p class="pl-10">
+            <span class="font-weight-bold text-primary">
+                @Session["nombreUsuario"]
+            </span>
+            ingresa los siguientes datos y visualiza tu perfil completo.
+        </p>
+    </div>
+
+    <div class="reservar-img rounded-circle">
+        @if (string.IsNullOrEmpty(Model.Foto))
+        {
+            <img class="b-primary-2 rounded-circle p-2" width="140px" height="140px" src="~/img/reservar/businessman.png" id="imageuser" alt="businessman.png">
+        }
+        else
+        {
+            <img class="b-primary-2 rounded-circle p-2" width="140px" height="140px" src="~/UploadFiles/@Model.Foto" id="imageuser" alt="businessman.png">
+        }
+
+        <div class=" texteditablecontent" style="display:none;position: absolute;    top: 60%;     left: 40%;     color: #31a0b5;">
+            <span class=" fileinput-button" style="    border-radius: 45px;     background-color: #3c9aa8;    width: 25px;    height:  25px;    text-align:  center;     color: white;">
+                <i class="far fa-file-image "></i>
+                <span>  </span>
+                <!-- The file input field used as target for the file upload widget -->
+                <input id="fileupload" type="file" name="files[]" multiple>
+            </span>
+            <br>
+            <br>
+            <!-- The global progress bar -->
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-12 pt-9 pb-9 small item-round-3 bg-gray-light position-relative">
+        <div class="reservar-edit">
+            <a href="#">
+                <img width="60px" height="60px" src="~/img/icons-color/edit.png" alt="edit.png" id="btnedit">
+
+            </a>
+
+        </div>
+        <form id="datosadicional">
+            <div class="row text-center justify-content-center">
+
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div class="col-md-5 pr-0 pl-0">
+                            <img height="65px" width="60px" src="~/img/icons-color/scale.png" alt="scale.png">
+                        </div>
+                        <div class="col-md-7 pt-3 pr-0 pl-0 text-md-left">
+                            <p class="font-weight-bold mb-1 text-primary">
+                                PESO
+                            </p>
+                            <p>
+                                <span class="editablecontent" id="lblpeso">@(Model.Peso)  KG</span>
+                                <div class="input-group  texteditablecontent" style="display:none">
+
+                                    <input type="text" class="form-control input-sm  text-uppercase" value="@(Model.Peso) " name="txtpeso" id="txtpeso" />
+                                    <span class="input-group-addon">KG</span>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div class="col-md-5 pr-0 pl-0">
+                            <img height="65px" src="~/img/icons-color/ruler.png" alt="scale.png">
+                        </div>
+                        <div class="col-md-7 pt-3 pr-0 pl-0 text-md-left">
+                            <p class="font-weight-bold mb-1 text-primary">
+                                ALTURA
+                            </p>
+                            <p>
+                                <span class="editablecontent" id="lblaltura">@(Model.Altura) CM</span>
+                                <div class="input-group  texteditablecontent" style="display:none">
+                                    <input type="text" class="form-control input-sm text-uppercase " value="@(Model.Altura)" name="altura" id="altura" />
+                                    <span class="input-group-addon">CM</span>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div class="col-md-5 pr-0 pl-0">
+                            <img height="65px" width="65px" src="~/img/icons-color/user.png" alt="user.png">
+                        </div>
+                        <div class="col-md-7 pt-3 pr-0 pl-0 text-md-left">
+                            <p class="font-weight-bold mb-1 text-primary">
+                                EDAD
+                            </p>
+                            <p>
+                                @ViewBag.age  AÑOS
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="col-md-5 pr-0 pl-0">
+                            <img height="65px" width="70px" src="~/img/icons-color/transfusion.png" alt="transfusion.png">
+                        </div>
+                        <div class="col-md-7 pt-3 pr-0 pl-0 text-md-left">
+                            <p class="font-weight-bold mb-1 text-primary">
+                                TIPO DE SANGRE
+                            </p>
+                            <p>
+                                <span class="editablecontent" id="lbltiposangre">@Model.TipoSangre</span>
+                                <div class="input-group  texteditablecontent" style="display:none">
+                                    <input type="text" class="form-control input-sm   text-uppercase" value="@Model.TipoSangre" id="tiposangre" name="tiposangre" />
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-lg-12">
+                    <div class="texteditablecontent" style="display:none"><hr /></div>
+                    <button type="button" id="btncancelarrinfo" class="btn btn-primary btn-round shadow-2" style="display:none">
+                        Cancelar
+                    </button> <button type="button" id="btnguardarinfo" class="btn btn-primary btn-round shadow-2" style="display:none">
+                        Guardar
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- /BOX PROFILE -->
+</section>
+
+@section Scripts {
+
+    <link href="~/Content/jquery.fileupload.css" rel="stylesheet" />
+    <script src="~/js/App/home/index.js"></script>
+    <script src="~/js/JqueryFileUpload/jquery.ui.widget.js"></script>
+    <script src="~/js/JqueryFileUpload/jquery.fileupload.js"></script>
+    <script>
+        $(document).ready(page.init);
+    </script>
+
+}

@@ -1,0 +1,444 @@
+﻿@model JockeySaludApplication.Model.Titular
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jockey Salud Familia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Jockey Salud Familia" />
+    <meta name="keywords" content="Jockey Salud Familia" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.min.css">
+
+</head>
+
+<body>
+
+    <header class="container-fluid bg-primary" id="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto text-light" style="background: url(@Url.Content("~/img/barra-header.png")) no-repeat center center; background-size: cover;">
+                    <p class="m-2 small pt-2 pb-2">
+                        Comunícate con nuestra Central de Citas al (01) 7 123 456 y atiéndete con nosotros
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+			<nav class="navbar navbar-expand-lg navbar-dark container">
+				<a class="navbar-brand" href="@Url.Content("~/")">
+					<img class="img-fluid" width="150px" src="~/img/logo.png" alt="logo">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					
+					<a class="btn btn-light btn-sm item-round-1 text-primary font-weight-bold hover-shadow-2 ml-auto" href="@Url.Action("Index","Login",new {@area="citas" })">
+						<i class="far fa-hand-point-up"></i>
+						SEPARA TU CITA
+					</a>
+
+					<!-- nav 2 -->
+					<!--
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown">
+							<a class="nav-link header-nav-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-bars"></i>
+							</a>
+						</li>
+					</ul>
+					-->
+					<!-- /nav 2 -->
+					
+				</div>
+			</nav>
+
+		</div>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- SECTION 1 -->
+        <section class="row pb-5">
+
+            <div class="col-md-6 pt-lg-10">
+                <div class="text-arriba-img-principal">
+                    <h1 class="pt-10 h4 text-uppercase">
+                        ¡Conoce todos los beneficios que
+                        <br><span class="text-primary font-weight-bold">JOCKEY SALUD FAMILIA</span> tiene para ti!
+                    </h1>
+
+                    <p class="text-center text-md-right pt-md-4">
+                        <a class="font-weight-bold" href="#solitud-plan">Solicita tu plan </a>
+                    </p>
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid" src="~/img/home/home.png" alt="img">
+            </div>
+
+        </section>
+        <!-- SECTION 1 -->
+
+
+        <div class="row">
+            <!-- COMBOS -->
+            <section class="col-md-6 mb-4">
+
+                <!-- COMBO 1 -->
+                <div class="row">
+                    <div class="col-md-3 text-white text-center pt-4 bg-primary">
+                        <img class="combo-care" src="~/img/icons/care.png" alt="care">
+                        <p>
+                            
+                        </p>
+                    </div>
+                    <div class="col-md-9 text-white pt-4 bg-secondary">
+                        <p class="mb-0">
+                            JOCKEY SALUD FAMILIA
+                        </p>
+                        <p class="font-weight-bold">
+                            PLAN AMBULATORIO 
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="row combos bg-gray-light text-center font-weight-bold text-primary pt-5">
+                    <div class="col-md-6 pb-5">
+                        <img class="mb-2" src="~/img/icons-color/patient.png" alt="patient">
+                        <p>
+                            Consultas desde S/. 50
+                        </p>
+                    </div>
+                    <div class="col-md-6 pb-5">
+                        <img class="mb-2" src="~/img/icons-color/vitamin.png" alt="vitamin">
+                        <p>
+                            Hasta 60% de dscto. en Farmacia
+                        </p>
+                    </div>
+                    <div class="col-md-6 pb-5">
+                        <img class="mb-2" src="~/img/icons-color/pipette.png" alt="pipette">
+                        <p>
+                            Hasta 50% de dscto. en Laboratorio
+                        </p>
+                    </div>
+                    <div class="col-md-6 pb-5">
+                        <img class="mb-2" src="~/img/icons-color/care-2.png" alt="care-2.png">
+                        <p>
+                            Hasta 30% de dscto. en Procedimientos
+                        </p>
+                    </div>
+                </div>
+                <!-- /COMBO 1 -->
+                <!-- COMBO 2 -->
+                <div class="row">
+                    <div class="col-md-3 text-white text-center pt-4 bg-primary">
+                        <img class="combo-care" src="~/img/icons/care.png" alt="care">
+                        <p>
+                            
+                        </p>
+                    </div>
+                    <div class="col-md-9 text-white pt-4 bg-secondary">
+                        <p class="mb-0">
+                            JOCKEY SALUD FAMILIA
+                        </p>
+                        <p class="font-weight-bold">
+                            PLAN ASISTENCIAL
+                        </p>
+                    </div>
+
+                </div>
+
+               <div class="row combos bg-gray-light text-center font-weight-bold text-primary pt-5">
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/first-aid-kit.png" alt="first-aid-kit">
+						<p>
+							Médico general a domicilio por S/. 25.00
+						</p>
+					</div>
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/doctora.png" alt="doctora">
+						<p>
+							Pediatra a domicilio a S/. 60.00
+						</p>
+					</div>
+
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/nurse.png" alt="nurse">
+						<p>
+							Enfermera a domicilio a S/. 35.00
+						</p>
+					</div>
+
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/ambulance.png" alt="ambulance">
+						<p>
+							Ambulancia a domicilio al 100% (Hasta S/. 250.00)
+						</p>
+					</div>
+
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/phone-call.png" alt="phone-call">
+						<p>
+							Orientación telefónica (Médica, nutricional, geriátrica, etc)
+						</p>
+					</div>
+
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/diente.png" alt="diente">
+						<p>
+							Emergencia odontológica (Hasta S/. 300.00)
+						</p>
+					</div>
+
+				</div>
+                <!-- /COMBO 2 -->
+                <!-- COMBO 3 -->
+                <div class="row">
+                    <div class="col-md-3 text-white text-center pt-4 bg-primary">
+                        <img class="combo-care" src="~/img/icons/care.png" alt="care">
+                        <p>
+                            
+                        </p>
+                    </div>
+                    <div class="col-md-9 text-white pt-4 bg-secondary">
+                        <p class="mb-0">
+                            JOCKEY SALUD FAMILIA
+                        </p>
+                        <p class="font-weight-bold">
+                           PLAN BIENESTAR
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="row combos bg-gray-light text-center font-weight-bold text-primary pt-5">
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/patient.png" alt="patient">
+						<p>
+							1 consulta nutricional
+						</p>
+					</div>
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/pipette.png" alt="pipette">
+						<p>
+							2 sesiones de podología
+						</p>
+					</div>
+					<div class="col-md-6 pb-5">
+						<img class="mb-2" src="~/img/icons-color/vitamin.png" alt="vitamin">
+						<p>
+							2 sesiones de masajes antiestrés
+						</p>
+					</div>
+				</div>
+                <!-- /COMBO 3 -->
+<!-- COMBO 4 -->
+				<div class="row">
+					<div class="col-md-3 text-white text-center pt-4 bg-primary">
+						<img class="combo-care" src="~/img/icons/phone.png" alt="care">
+					</div>
+					<div class="col-md-9 text-white pt-4 bg-secondary">
+						<p class="mb-4 text--info">
+							Obtén más información de nuestro Programa de Beneficios comunicándote al 7123456 anexo 7906 o escríbenos a jockeysaludfamilia@jockeysalud.com.pe
+						</p>
+					</div>
+
+				</div>
+            </section>
+            <!-- /COMBOS -->
+            <!-- FORMS -->
+            <section class="col-md-5 ml-auto" id="solitud-plan">
+
+                <!-- FORM 1 -->
+                <div class="row">
+                    <div class="col-md-12 text-center text-white pt-4 bg-secondary">
+                        <p class="mb-0 font-weight-bold">
+                            ADQUIERE TU PLAN
+                        </p>
+                        <p>
+                            JOCKEY SALUD FAMILIA
+                        </p>
+                    </div>
+
+                </div>
+                <form class="form-gray-fields" onsubmit="return validar(this)" method="post">
+                    <div class="row combos b-gray-1 text-center pt-5 mb-5">
+                        <div class="col-md-12 pb-4">
+
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Nombre, new { aria_required = true, @class = "form-control required", name = "nombre", placeholder = "Nombre", id = "nombre", type = "text", required = "required" })
+                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.ApellidoPaterno, new { aria_required = true, @class = "form-control required", name = "apellidop", placeholder = "Apellido Paterno", id = "apellidop", type = "text", required = "required" })
+                                @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.ApellidoMaterno, new { aria_required = true, @class = "form-control required", name = "apellidom", placeholder = "Apellido Materno", id = "apellidom", type = "text", required = "required" })
+                                @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Email, new { aria_required = true, @class = "form-control required email", name = "email", placeholder = "Correo Electronico", id = "email", type = "email", required = "required" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.TelefonoFijo, new { @class = "form-control required", name = "telefono", placeholder = "Teléfono Fijo", id = "telefono", title = "7 dígitos de su teléfono", type = "tel", onkeypress = "return justNumbers(event);", pattern = ".{7}", maxlength = "7" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.TelefonoCelular, new { @class = "form-control required", name = "celular", placeholder = "Teléfono Celular", id = "celular", title = "dígitos de su celular", type = "tel", onkeypress = "return justNumbers(event);", pattern = ".{9}", maxlength = "9", required = "required" })
+                                @Html.ValidationMessageFor(model => model.TelefonoCelular, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.NumeroDocumento, new { aria_required = true, @class = "form-control required", name = "dni", placeholder = "Documentos de Identidad (DNI)", id = "dni", title = "8 dígitos de su DNI", type = "text", onkeypress = "return justNumbers(event);", pattern = ".{8}", maxlength = "8", required = "required" })
+                                @Html.ValidationMessageFor(model => model.NumeroDocumento, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.FechaNacimiento, new { aria_required = true, @class = "form-control required", name = "fecha", placeholder = "Fecha de Nacimiento", id = "fecha", type = "text", maxlength = "10", data_date_end_date = "0d", required = "required" })
+                                @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+                            </div>
+
+
+                            <div class="form-group">
+                                <p>
+                                    ¿ Desea ser Beneficiario ?
+                                </p>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="radio-inline jradio">@Html.RadioButton("opRadio", "SI", false, new { type = "radio", name = "opRadio", id = "rsi", onclick = "validarPlan(this);" })  SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="radio-inline jradio">@Html.RadioButton("opRadio", "NO", false, new { type = "radio", name = "opRadio", id = "rno", onclick = "validarPlan(this);" }) NO</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /FORM 1 -->
+                    <!-- FORM 2 -->
+                    <div class="row combos b-gray-1 pt-5">
+                        <div class="col-md-12 pb-4">
+                            <div class="form-group" id="inputPlan" style="display:none;">
+                                <label for="plan_prestacion">Plan Prestacion</label>
+                                @Html.DropDownListFor(model => model.PlanPk, new SelectList(ViewBag.Planes, "Pk", "Nombre"), "Selecciona el plan", new { @class = "form-control" })
+                            </div>
+                            <div class="form-group" id="inputBeneficiarios" style="display:none;">
+                                <label for="plan_prestacion">¿ Deseas inscribir a otros beneficios ?</label>
+                                <select name="oBeneficiarios" id="oBeneficiarios" aria-requiere="true" class="form-control">
+                                    <option value="" disabled selected id="fBeneficiarios">Selecciona la cantidad</option>
+                                    <option value="0" id="cBeneficiarios">0 Ninguna persona</option>
+                                    <option value="1">1 persona</option>
+                                    <option value="2">2 personas</option>
+                                    <option value="3">3 personas</option>
+                                    <option value="4">4 personas</option>
+                                    <option value="5">5 personas</option>
+                                </select>
+                            </div>
+                            <div class="form-group text-center">
+                                <p>
+                                   <a href="~/Images/Texto_PDP_virtual[1].pdf" target="_blank"> Autorizo el tratamiento de datos personales </a>
+                                </p>
+                                <div class="form-check form-check-inline">
+                                    <label  class="radio-inline jradio">@Html.RadioButton("opRadioLegal", "SI", false, new { type = "radio", name = "opRadioLegal", id = "rlsi", onclick = "validarLegal(this);" }) SI</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label  class="radio-inline jradio">@Html.RadioButton("opRadioLegal", "NO", false, new { type = "radio", name = "opRadioLegal", id = "rlno", onclick = "validarLegal(this);" }) NO</label>
+                                </div>
+                            </div>
+
+
+                            <button type="submit" id="btnContinuar" class="mt-4 btn btn-primary btn-lg btn-block">
+                                CONTINUAR
+                            </button>
+
+                        </div>
+
+                    </div>
+                </form>
+                <!-- /FORM 2 -->
+
+            </section>
+            <!-- /FORMS -->
+        </div>
+
+
+    </main>
+
+    <footer class="container-fluid bg-primary text-white text-center mt-5 pt-5 pb-4">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <p class="small text-left links-white">
+                        Jockey Salud Copyright 2018 - Todos los derechos reservados.<br>
+                        Desarrollado por <a target="_blank" href="http://www.cliclatam.com" title="Diseño y desarrollo Web">CLIC Perú</a>
+                    </p>
+                </div>
+
+                <div class="col-md-6 text-right">
+
+
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://www.facebook.com/JockeySalud">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://twitter.com/JockeySalud">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://jockeysalud.wordpress.com/">
+                        <i class="fab fa-wordpress" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- Jquery, Boostrap and Popper Minified -->
+    <script src="~/js/core/core-dist.js"></script>
+
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
+    <script>
+        $('#fecha').datepicker({
+            dateFormat: 'dd-MM-yyyy',
+            language: 'es',
+            startView: "decade"
+        });
+    </script>
+
+    @Scripts.Render("~/Custom/js")
+</body>
+
+</html>

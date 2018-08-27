@@ -1,0 +1,173 @@
+﻿@model DAL.JockeySalud.CitaModel.Cita
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Areas/citas/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- BOX BG -->
+
+<section class="row text-white" style="background: url(@Url.Content("~/img/barra-reservar.png")) no-repeat; background-size: cover; min-height: 120px;">
+
+    <div class="col-md-2 text-center">
+        <img class="img-fluid" src="~/img/reservar/doctora.png" alt="doctora">
+    </div>
+    <div class="col-md-10">
+        <p class="pt-5 h5 text-uppercase text-center mr-3">
+            CHEQUEOS AGENDADOS
+        </p>
+    </div>
+</section>
+<form method="post">
+    @Html.HiddenFor(model => model.IntCodEspe)
+    @Html.HiddenFor(model => model.StrEspe)
+    @Html.HiddenFor(model => model.Cobertura)
+    @Html.HiddenFor(model => model.StrCodMed)
+    @Html.HiddenFor(model => model.Nombre)
+    @Html.HiddenFor(model => model.ApellidoPat)
+    @Html.HiddenFor(model => model.ApellidoMat)
+    @Html.HiddenFor(model => model.StrFecha)
+    @Html.HiddenFor(model => model.StrFechaHoraIni)
+    @{var counter = 0; }
+    @foreach (var item in Model.Dependientes)
+    {
+        @Html.HiddenFor(model => item.Nombres, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".Nombres" })
+        @Html.HiddenFor(model => item.f_nacimiento, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".f_nacimiento" })
+        @Html.HiddenFor(model => item.Documento, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".Documento" })
+        @Html.HiddenFor(model => item.Celular, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".Celular" })
+        @Html.HiddenFor(model => item.Telefonofijo, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".Telefonofijo" })
+        @Html.HiddenFor(model => item.Email, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".Email" })
+        @Html.HiddenFor(model => item.Cobertura, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".Cobertura" })
+        @Html.HiddenFor(model => item.STRHORAINI, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".STRHORAINI" })
+        @Html.HiddenFor(model => item.STRFECHA, new { @Name = string.Format("{0:Dependientes[0]}", counter) + ".STRFECHA" })
+        counter++;
+    }
+    <!-- /BOX BG -->
+    <!-- Horarios -->
+    <!-- /BOX BG -->
+    <!-- Horarios -->
+    <section id="horarios" class="row pt-6 pb-10 text-center d-flex justify-content-around">
+        <div class="col-md-12 text-left mb-5">
+            <p class="mb-2">
+                <span class="font-weight-bold text-primary">DETALLE:</span>
+            </p>
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-primary">#</th>
+                            <th scope="col" class="text-primary">Paciente</th>
+                            <th scope="col"></th>
+                            <th scope="col" class="text-primary">Horario</th>
+                            <th scope="col" class="text-primary">Cobertura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var count = 1;}
+                        @if (ViewBag.istitular.Equals("1"))
+                        {
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td>@Model.Nombre</td>
+                                <td>(Titular)</td>
+                                <td>
+                                    @Model.StrFecha
+                                    en el turno
+                                    @(Model.StrFechaHoraIni.Contains("7") ? "I" : "II")
+                                    @Model.StrFechaHoraIni
+                                </td>
+                                <td>@Model.Cobertura</td>
+                            </tr>
+                            count++;
+                        }
+                        @foreach (var item in Model.Dependientes)
+                        {
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td>@item.Nombres</td>
+                                <td>(Dependiente)</td>
+                                <td>
+                                    @item.STRFECHA
+                                    en el turno
+                                    @(item.STRHORAINI.Contains("7") ? "I" : "II")
+                                    @item.STRHORAINI
+                                </td>
+                                <td>@item.Cobertura</td>
+                            </tr>
+                            count++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="w-100"></div>
+        <div class="col-sm-6 text-center mt-7">
+            <input type="hidden" id="isback" name="isback" value="0" />
+            <input type="hidden" id="istitular" name="istitular" value="@ViewBag.istitular" />
+            <button type="submit" id="btnback" class="btn btn-primary btn-round shadow-2 pr-6 pl-6">
+                Atrás
+            </button>
+        </div>
+        <div class="col-sm-6 text-center mt-7">
+
+            <button type="button" id="btnRegistrarcita" class="btn btn-primary btn-round shadow-2">
+                Confirmar reserva
+            </button>
+        </div>
+    </section>
+</form>
+<!-- /Horarios -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content modal-reservar">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <h5>
+                <p class="modal-reservar-fondo" style="background: url(@Url.Content("~/img/barra-doctora.png")) no-repeat; background-size: cover; min-height: 80px;">
+                    ¡SOLICITUD RECIBIDA!
+                </p>
+            </h5>
+            <div class="modal-body pr-7 pl-7 text-center h5">
+                <p>
+
+                    <small class="text-primary">@Session["nombreUsuario"],</small> hemos recibido su solicitud  reserva de chequeo, estaremos enviando a <b>@Session["VDESMAIL"]</b> la confirmación dentro de las próximas 48 horas.
+
+                </p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <div class="modal-footer d-flex justify-content-center">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Modal -->
+
+@section Scripts {
+    <!-- Bootstrap 4 DatePicker -->
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="~/js/App/chequeo/detalle.js?v=@JockeySaludApplication.Utils.Config.versionfiles"></script>
+    <script>
+        //Medicos
+        $('#horarios .select-horario').on('click', function () {
+            $('.select-horario.select-horario-active').removeClass('select-horario-active');
+            $(this).addClass('select-horario-active');
+        });
+        var jsoncita='@Html.Raw(ViewBag.jsoncita)';
+        //Calendario
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+
+        $(document).ready(page.init);
+    </script>
+
+}

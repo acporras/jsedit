@@ -1,0 +1,887 @@
+﻿@model JockeySaludApplication.Model.Titular
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pasarela - Jockey Salud Familia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Jockey Salud Familia" />
+    <meta name="keywords" content="Jockey Salud Familia" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.min.css">
+
+</head>
+
+<body>
+
+    <header class="container-fluid bg-primary" id="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto text-light" style="background: url(@Url.Content("~/img/barra-header.png")) no-repeat center center; background-size: cover;">
+                    <p class="m-2 small pt-2 pb-2">
+                        Comunícate con nuestra Central de Citas al (01) 7 123 456 y atiéndete con nosotros
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-dark container">
+                <a class="navbar-brand" href="@Url.Content("~/")">
+                    <img class="img-fluid" width="150px" src="~/img/logo.png" alt="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Nav1 -->
+                    <!-- /Nav1 -->
+
+                    <a class="btn btn-light btn-sm item-round-1 text-primary font-weight-bold hover-shadow-2 ml-auto" href="iniciar-sesion.html">
+                        <i class="far fa-hand-point-up"></i>
+                        SEPARA TU CITA
+                    </a>
+
+                    <!-- nav 2 -->
+                    <!--
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link header-nav-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    -->
+                    <!-- /nav 2 -->
+
+                </div>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- FORMS -->
+        <section class="row mt-10">
+
+            <!-- Title -->
+            <div class="col-md-12">
+                <div class="row text-white pt-4 pb-4 bg-secondary">
+                    <div class="col-md-2 text-center">
+                        <img height="50px" src="~/img/icons/family-room.png" alt="family-room">
+                    </div>
+                    <div class="col-md-10">
+                        <p class="mb-0 font-weight-bold">
+                            AFÍLIATE AHORA A JOCKEY SALUD FAMILIA
+                        </p>
+                        <p class="mb-0">
+                            Y OBTÉN GRANDES BENEFICIOS
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Title -->
+            <!-- FORM 1 -->
+            <div class="col-md-12">
+
+                <form class="row combos b-gray-1 text-center pt-5 pb-5 mb-5" onsubmit="return validarCompra(this);" method="post">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Pk)
+                    @Html.HiddenFor(model => model.CantidadBeneficiarios)
+                    @Html.HiddenFor(model => model.MontoPago)
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-12 pb-2">
+                        <p class="text-secondary font-weight-bold">
+                            Por favor, complete los campos restantes para continuar con el proceso de compra.
+                        </p>
+                    </div>
+
+                    <div class="col-md-12 pb-2">
+                        <h5 class="h5 text-uppercase text-secondary">Datos del Titular</h5>
+                    </div>
+
+                    <div class="col-md-5 ml-auto">
+                        <div class="form-group">
+                            @Html.HiddenFor(model => model.EsBeneficiario)
+                            @Html.TextBoxFor(model => model.Nombre, new { aria_required = true, @class = "form-control required", name = "nombre", placeholder = "Nombre", id = "nombre", type = "text", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { aria_required = true, @class = "form-control required", name = "apellidop", placeholder = "Apellido Paterno", id = "apellidop", type = "text", required = "required" })
+                            @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ApellidoMaterno, new { aria_required = true, @class = "form-control required", name = "apellidom", placeholder = "Apellido Materno", id = "apellidom", type = "text", required = "required" })
+                            @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.Email, new { aria_required = true, @class = "form-control required email", name = "email", placeholder = "Email", id = "email", type = "email", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group ">
+                            @Html.TextBoxFor(model => model.TelefonoFijo, new { aria_required = true, @class = "form-control required", name = "telefono", placeholder = "Teléfono fijo", id = "telefono", title = "7 dígitos de su teléfono ó 9 dígitos de su celular", type = "tel", onkeypress = "return justNumbers(event);", pattern = ".{7,9}", maxlength = "9", required = "required" })
+                            @Html.ValidationMessageFor(model => model.TelefonoFijo, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.TelefonoCelular, new { aria_required = true, @class = "form-control required", name = "telefono", placeholder = "Teléfono fijo", id = "telefono", title = "7 dígitos de su teléfono ó 9 dígitos de su celular", type = "tel", onkeypress = "return justNumbers(event);", pattern = ".{7,9}", maxlength = "9", required = "required" })
+                            @Html.ValidationMessageFor(model => model.TelefonoCelular, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.NumeroDocumento, new { aria_required = true, @class = "form-control required", name = "dni", placeholder = "DNI", id = "dni", title = "8 dígitos de su DNI", type = "text", onkeypress = "return justNumbers(event);", pattern = ".{8}", maxlength = "8", required = "required" })
+                            @Html.ValidationMessageFor(model => model.NumeroDocumento, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.FechaNacimiento, new { @Value = Model.FechaNacimiento.ToString("dd/MM/yyyy"), aria_required = true, @class = "form-control required", name = "fecha", placeholder = "Fecha de Nacimiento", id = "fecha", type = "text", maxlength = "10", data_date_end_date = "0d", required = "required" })
+                            @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 mr-auto">
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.Sexualidad, new List<SelectListItem>
+                                                                                {
+                                                                                new SelectListItem {Text="Masculino" , Value="M"},
+                                                                                new SelectListItem{Text= "Femenino",Value="F"},
+                                                                                }, "Sexo", new { id = "sexo", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.DepartamentoId, Model.Departamentos, "Departamento", new { @class = "form-control" })
+                            @Html.ValidationMessage("Un departamento debe ser seleccionada")
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.ProvinciaId, Model.Provincias, "Provincia", new { @class = "form-control" })
+                            @Html.ValidationMessage("Una provincia debe ser seleccionada")
+                            <span id="states-loading-progress" style="display: none;">Espere...</span>
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.DistritoId, Model.Distritos, "Distrito", new { @class = "form-control" })
+                            @Html.ValidationMessage("Un distrito debe ser seleccionada")
+                            <span id="states-loading-progress" style="display: none;">Espere...</span>
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.Direccion, new { aria_required = true, @class = "form-control required", name = "direccion", placeholder = "Dirección", id = "direccion", type = "text", title = "Dirección" })
+                            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                        </div>
+                        <!-- Set Plan elegido en la página anterior y se añade atributo readonly para que no pueda modificarlo -->
+                        <div class="form-group">
+                            @if (Model.Plan == null)
+                            {
+                                @Html.DropDownList("d", new SelectList(new List<String>() { "Ninguno (S/. 00.00)" }, "Ninguno (S/. 00.00)"), "Ninguno (S/. 00.00)", new { disabled = "disabled", @class = "form-control" })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.PlanPk, new SelectList(ViewBag.Planes, "Pk", "Nombre", Model.PlanPk), new { @class = "form-control" })
+                            }
+                        </div>
+                    </div>
+                    @{int counter = 0;}
+                    @foreach (var bene in Model.Beneficiarios)
+                    {
+                        @Html.HiddenFor(m => bene.Pk)
+                        @Html.HiddenFor(m => bene.TitularPk, new { value = Model.Pk })
+                        <div class="col-md-12 pb-2">
+                            <h5 class="h5 text-uppercase text-secondary">Datos del Beneficiario #@(counter + 1)</h5>
+                        </div>
+                        <div class="col-md-5 ml-auto">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => bene.Nombre, new { aria_required = true, @class = "form-control required", Name = "Beneficiarios[" + counter.ToString() + "].Nombre", placeholder = "Nombre", id = "nombreb", type = "text", required = "required" })
+                                @Html.ValidationMessageFor(model => bene.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => bene.ApellidoPaterno, new { aria_required = true, @class = "form-control required", Name = "Beneficiarios[" + counter.ToString() + "].ApellidoPaterno", placeholder = "Apellido Paterno", id = "apellidopb", type = "text", required = "required" })
+                                @Html.ValidationMessageFor(model => bene.ApellidoPaterno, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => bene.ApellidoMaterno, new { aria_required = true, @class = "form-control required", Name = "Beneficiarios[" + counter.ToString() + "].ApellidoMaterno", placeholder = "Apellido Materno", id = "apellidomb", type = "text", required = "required" })
+                                @Html.ValidationMessageFor(model => bene.ApellidoMaterno, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => bene.Email, new { aria_required = true, @class = "form-control required email", Name = "Beneficiarios[" + counter.ToString() + "].Email", placeholder = "Email", id = "emailb", type = "email", title = "alguien@example.com", required = "required" })
+                                @Html.ValidationMessageFor(model => bene.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group ">
+                                @Html.TextBoxFor(model => bene.TelefonoFijo, new { aria_required = true, pattern = ".{7,9}", @class = "form-control required", Name = "Beneficiarios[" + counter.ToString() + "].TelefonoFijo", placeholder = "Teléfono fijo", id = "telefonob", type = "tel", title = "7 dígitos de su teléfono ó 9 dígitos de su celular", onkeypress = "return justNumbers(event);", maxlength = "9", required = "required" })
+                                @Html.ValidationMessageFor(model => bene.TelefonoFijo, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => bene.NumeroDocumento, new { aria_required = true, pattern = ".{8}", @class = "form-control required", id = "Beneficiarios_" + counter.ToString() + "__NumeroDocumento", Name = "Beneficiarios[" + counter.ToString() + "].NumeroDocumento", placeholder = "DNI", type = "text", title = "8 dígitos de su DNI", onkeypress = "return justNumbers(event);", onkeyup = "return validarDNI(this);", maxlength = "8" })
+                                @Html.ValidationMessageFor(model => bene.NumeroDocumento, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => bene.FechaNacimiento, new { @Value = "", aria_required = true, @class = "form-control required", Name = "Beneficiarios[" + counter.ToString() + "].FechaNacimiento", placeholder = "Fecha de Nacimiento", type = "text", maxlength = "10", data_date_end_date = "0d", required = "required", id = "Beneficiarios_" + counter.ToString() + "__FechaNacimiento" })
+                                @Html.ValidationMessageFor(model => bene.FechaNacimiento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-5 mr-auto">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => bene.Sexualidad, new List<SelectListItem>
+                                                                                {
+                                                                                new SelectListItem {Text="Masculino" , Value="M"},
+                                                                                new SelectListItem{Text= "Femenino",Value="F"},
+                                                                                }, "Sexo", new { Name = "Beneficiarios[" + counter.ToString() + "].Sexualidad", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => bene.Sexualidad)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => bene.DepartamentoId, Model.Departamentos, "Departamento", new { @class = "form-control", id = "Beneficiarios_" + counter.ToString() + "__DepartamentoId", Name = "Beneficiarios[" + counter.ToString() + "].DepartamentoId" })
+                                @Html.ValidationMessage("Un departamento debe ser seleccionada")
+                                <span id="states-loading-progress" style="display: none;">Espere...</span>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => bene.ProvinciaId, Model.Provincias, "Provincia", new { @class = "form-control", id = "Beneficiarios_" + counter.ToString() + "__ProvinciaId", Name = "Beneficiarios[" + counter.ToString() + "].ProvinciaId" })
+                                <span id="states-loading-progress" style="display: none;">Espere...</span>
+                                @Html.ValidationMessage("Una provincia debe ser seleccionada")
+                            </div>
+
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => bene.DistritoId, Model.Distritos, "Distrito", new { @class = "form-control", id = "Beneficiarios_" + counter.ToString() + "__DistritoId", Name = "Beneficiarios[" + counter.ToString() + "].DistritoId" })
+                                <span id="states-loading-progress" style="display: none;">Espere...</span>
+                                @Html.ValidationMessage("Un distrito debe ser seleccionada")
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => bene.Direccion, new { aria_required = true, @class = "form-control required", Name = "Beneficiarios[" + counter.ToString() + "].Direccion", placeholder = "Dirección", id = "direccionb", type = "text" })
+                                @Html.ValidationMessageFor(model => bene.Direccion, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => bene.PlanPk, new SelectList(ViewBag.PlanesBeneficiarios, "Pk", "Nombre"), new { @class = "form-control", id = "Beneficiarios_" + counter.ToString() + "__PlanPk", Name = "Beneficiarios[" + counter.ToString() + "].PlanPk" })
+                                @Html.ValidationMessageFor(x => x.Beneficiarios.ToList()[counter].PlanPk)
+                            </div>
+                        </div>
+                        counter++;
+                    }
+
+                    <div class="col-md-5 ml-auto">
+                        <h4 id="total">Total:S/. @Model.MontoPago</h4>
+                        <button type="submit" class="btn btn-secondary btn-block">
+                            COMPRAR AHORA
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+            <!-- /FORM 1 -->
+
+        </section>
+        <!-- /FORMS -->
+
+
+    </main>
+
+    <footer class="container-fluid bg-primary text-white text-center mt-5 pt-5 pb-4">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <p class="small text-left links-white">
+                        Jockey Salud Copyright 2018 - Todos los derechos reservados.<br>
+                        Desarrollado por <a target="_blank" href="http://www.cliclatam.com" title="Diseño y desarrollo Web">CLIC Perú</a>
+                    </p>
+                </div>
+
+                <div class="col-md-6 text-right">
+
+
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://www.facebook.com/JockeySalud">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://twitter.com/JockeySalud">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://jockeysalud.wordpress.com/">
+                        <i class="fab fa-wordpress" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- Jquery, Boostrap and Popper Minified -->
+    <script src="~/js/core/core-dist.js"></script>
+
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#DepartamentoId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#ProvinciaId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetProvinciasPorDepartamento"))",
+                    data: { "DepartamentoId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ProvinciaId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#DistritoId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetDistritosPorProvincia"))",
+                    data: { "ProvinciaId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#Beneficiarios_0__DepartamentoId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#Beneficiarios_0__ProvinciaId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetProvinciasPorDepartamento"))",
+                    data: { "DepartamentoId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+        $(function () {
+            $("#Beneficiarios_0__ProvinciaId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#Beneficiarios_0__DistritoId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetDistritosPorProvincia"))",
+                    data: { "ProvinciaId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#Beneficiarios_1__DepartamentoId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#Beneficiarios_1__ProvinciaId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetProvinciasPorDepartamento"))",
+                    data: { "DepartamentoId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+        $(function () {
+            $("#Beneficiarios_1__ProvinciaId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#Beneficiarios_1__DistritoId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetDistritosPorProvincia"))",
+                    data: { "ProvinciaId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#Beneficiarios_2__DepartamentoId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#Beneficiarios_2__ProvinciaId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetProvinciasPorDepartamento"))",
+                    data: { "DepartamentoId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+        $(function () {
+            $("#Beneficiarios_2__ProvinciaId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#Beneficiarios_2__DistritoId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetDistritosPorProvincia"))",
+                    data: { "ProvinciaId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#Beneficiarios_3__DepartamentoId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#Beneficiarios_3__ProvinciaId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetProvinciasPorDepartamento"))",
+                    data: { "DepartamentoId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+        $(function () {
+            $("#Beneficiarios_3__ProvinciaId").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#Beneficiarios_3__DistritoId");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetDistritosPorProvincia"))",
+                    data: { "ProvinciaId": selectedItem },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.Value).html(option.Text));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+
+
+
+
+        $(function () {
+            $("#PlanPk").change(function () {
+                var selectedItem = $(this).val();
+                var monto0 = 0,monto1=0, monto2=0, monto3=0, monto4=0;
+                if ($('#Beneficiarios_0__PlanPk').length != 0 ){
+                    monto0 = document.getElementById('Beneficiarios_0__PlanPk').value
+                }
+                if ($('#Beneficiarios_1__PlanPk').length != 0 ){
+                    monto1 = document.getElementById('Beneficiarios_1__PlanPk').value
+                }
+                if ($('#Beneficiarios_2__PlanPk').length != 0 ){
+                    monto2 = document.getElementById('Beneficiarios_2__PlanPk').value
+                }
+                if ($('#Beneficiarios_3__PlanPk').length != 0 ){
+                    monto3 = document.getElementById('Beneficiarios_3__PlanPk').value
+                }
+                if ($('#Beneficiarios_4__PlanPk').length != 0 ){
+                    monto4 = document.getElementById('Beneficiarios_4__PlanPk').value
+                }
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("CalculatePayment"))",
+                    data: { "PlanPk": selectedItem, "PlanPk1": monto1, "PlanPk2": monto2, "PlanPk3": monto3,"PlanPk4": monto4, "PlanPkTitular": monto0 },
+                success: function (data) {
+                    total.innerText = "Total S/. " + data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+        });
+        });
+
+        $(function () {
+            $("#Beneficiarios_0__PlanPk").change(function () {
+                var selectedItem = $(this).val();
+                var montoTitular = $("#PlanPk").val();
+                var monto1=0, monto2=0, monto3=0, monto4=0;
+                if ($('#Beneficiarios_1__PlanPk').length != 0 ){
+                    monto1 = document.getElementById('Beneficiarios_1__PlanPk').value
+                }
+                if ($('#Beneficiarios_2__PlanPk').length != 0 ){
+                    monto2 = document.getElementById('Beneficiarios_2__PlanPk').value
+                }
+                if ($('#Beneficiarios_3__PlanPk').length != 0 ){
+                    monto3 = document.getElementById('Beneficiarios_3__PlanPk').value
+                }
+                if ($('#Beneficiarios_4__PlanPk').length != 0 ){
+                    monto4 = document.getElementById('Beneficiarios_4__PlanPk').value
+                }
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("CalculatePayment"))",
+                    data: { "PlanPk": selectedItem, "PlanPk1": monto1, "PlanPk2": monto2, "PlanPk3": monto3,"PlanPk4": monto4, "PlanPkTitular": montoTitular },
+                success: function (data) {
+                        total.innerText = "Total S/. " + data;
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+
+        $(function () {
+            $("#Beneficiarios_1__PlanPk").change(function () {
+                var selectedItem = $(this).val();
+                var montoTitular = $("#PlanPk").val();
+                var monto1=0, monto2=0, monto3=0, monto4=0;
+                if ($('#Beneficiarios_0__PlanPk').length != 0 ){
+                    monto1 = document.getElementById('Beneficiarios_0__PlanPk').value
+                }
+                if ($('#Beneficiarios_2__PlanPk').length != 0 ){
+                    monto2 = document.getElementById('Beneficiarios_2__PlanPk').value
+                }
+                if ($('#Beneficiarios_3__PlanPk').length != 0 ){
+                    monto3 = document.getElementById('Beneficiarios_3__PlanPk').value
+                }
+                if ($('#Beneficiarios_4__PlanPk').length != 0 ){
+                    monto4 = document.getElementById('Beneficiarios_4__PlanPk').value
+                }
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("CalculatePayment"))",
+                    data: { "PlanPk": selectedItem, "PlanPk1": monto1, "PlanPk2": monto2, "PlanPk3": monto3,"PlanPk4": monto4, "PlanPkTitular": montoTitular },
+                success: function (data) {
+                    total.innerText = "Total S/. " + data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+            });
+        });
+        $(function () {
+            $("#Beneficiarios_2__PlanPk").change(function () {
+                var selectedItem = $(this).val();
+                var montoTitular = $("#PlanPk").val();
+                var monto1=0, monto2=0, monto3=0, monto4=0;
+                if ($('#Beneficiarios_0__PlanPk').length != 0 ){
+                    monto1 = document.getElementById('Beneficiarios_0__PlanPk').value
+                }
+                if ($('#Beneficiarios_1__PlanPk').length != 0 ){
+                    monto2 = document.getElementById('Beneficiarios_1__PlanPk').value
+                }
+                if ($('#Beneficiarios_3__PlanPk').length != 0 ){
+                    monto3 = document.getElementById('Beneficiarios_3__PlanPk').value
+                }
+                if ($('#Beneficiarios_4__PlanPk').length != 0 ){
+                    monto4 = document.getElementById('Beneficiarios_4__PlanPk').value
+                }
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("CalculatePayment"))",
+                    data: { "PlanPk": selectedItem, "PlanPk1": monto1, "PlanPk2": monto2, "PlanPk3": monto3,"PlanPk4": monto4, "PlanPkTitular": montoTitular },
+                success: function (data) {
+                    total.innerText = "Total S/. " + data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+            });
+        });
+        $(function () {
+            $("#Beneficiarios_3__PlanPk").change(function () {
+                var selectedItem = $(this).val();
+                var montoTitular = $("#PlanPk").val();
+                var monto1=0, monto2=0, monto3=0, monto4=0;
+                if ($('#Beneficiarios_0__PlanPk').length != 0 ){
+                    monto1 = document.getElementById('Beneficiarios_0__PlanPk').value
+                }
+                if ($('#Beneficiarios_1__PlanPk').length != 0 ){
+                    monto2 = document.getElementById('Beneficiarios_1__PlanPk').value
+                }
+                if ($('#Beneficiarios_2__PlanPk').length != 0 ){
+                    monto3 = document.getElementById('Beneficiarios_2__PlanPk').value
+                }
+                if ($('#Beneficiarios_4__PlanPk').length != 0 ){
+                    monto4 = document.getElementById('Beneficiarios_4__PlanPk').value
+                }
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("CalculatePayment"))",
+                    data: { "PlanPk": selectedItem, "PlanPk1": monto1, "PlanPk2": monto2, "PlanPk3": monto3,"PlanPk4": monto4, "PlanPkTitular": montoTitular },
+                success: function (data) {
+                    total.innerText = "Total S/. " + data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+            });
+        });
+        $(function () {
+            $("#Beneficiarios_4__PlanPk").change(function () {
+                var selectedItem = $(this).val();
+                var montoTitular = $("#PlanPk").val();
+                var monto1=0, monto2=0, monto3=0, monto4=0;
+                if ($('#Beneficiarios_0__PlanPk').length != 0 ){
+                    monto1 = document.getElementById('Beneficiarios_0__PlanPk').value
+                }
+                if ($('#Beneficiarios_1__PlanPk').length != 0 ){
+                    monto2 = document.getElementById('Beneficiarios_1__PlanPk').value
+                }
+                if ($('#Beneficiarios_2__PlanPk').length != 0 ){
+                    monto3 = document.getElementById('Beneficiarios_2__PlanPk').value
+                }
+                if ($('#Beneficiarios_3__PlanPk').length != 0 ){
+                    monto4 = document.getElementById('Beneficiarios_3__PlanPk').value
+                }
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("CalculatePayment"))",
+                    data: { "PlanPk": selectedItem, "PlanPk1": monto1, "PlanPk2": monto2, "PlanPk3": monto3,"PlanPk4": monto4, "PlanPkTitular": montoTitular },
+                success: function (data) {
+                    total.innerText = "Total S/. " + data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+        });
+        });
+
+        function CalcularTotal() {
+            var selectedItem = 0;
+            var montoTitular = $("#PlanPk").val();
+                var monto1=0, monto2=0, monto3=0, monto4=0;
+                if ($('#Beneficiarios_0__PlanPk').length != 0 ){
+                    monto1 = document.getElementById('Beneficiarios_0__PlanPk').value;
+                }
+                if ($('#Beneficiarios_1__PlanPk').length != 0 ){
+                    monto2 = document.getElementById('Beneficiarios_1__PlanPk').value;
+                }
+                if ($('#Beneficiarios_2__PlanPk').length != 0 ){
+                    monto3 = document.getElementById('Beneficiarios_2__PlanPk').value;
+                }
+                if ($('#Beneficiarios_3__PlanPk').length != 0 ){
+                    monto4 = document.getElementById('Beneficiarios_3__PlanPk').value;
+                }
+                if ($('#Beneficiarios_4__PlanPk').length != 0) {
+                    selectedItem = document.getElementById('Beneficiarios_4__PlanPk').value;
+                }
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("CalculatePayment"))",
+                    data: { "PlanPk": selectedItem, "PlanPk1": monto1, "PlanPk2": monto2, "PlanPk3": monto3,"PlanPk4": monto4, "PlanPkTitular": montoTitular },
+                success: function (data) {
+                    total.innerText = "Total S/. " + data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+
+        }
+    </script>
+    <script type="text/javascript">
+
+        //Fecha de nacimiento de titular datepicker
+        $(document).ready(function () {
+            $('#fecha').datepicker({
+                language: 'es',
+                startView: "decade"
+
+            }).on('change', function () {
+                $(this).valid();
+            });
+
+
+            //fechanac beneficio 01
+            $('#Beneficiarios_0__FechaNacimiento').datepicker({
+                language: 'es',
+                startView: "decade"
+
+            }).on('change', function () {
+                $(this).valid();
+            });
+
+            //fechanac beneficio 02
+            $('#Beneficiarios_1__FechaNacimiento').datepicker({
+                language: 'es',
+                startView: "decade"
+
+            }).on('change', function () {
+                $(this).valid();
+            });
+
+            //fechanac beneficio 03
+            $('#Beneficiarios_2__FechaNacimiento').datepicker({
+                language: 'es',
+                startView: "decade"
+
+            }).on('change', function () {
+                $(this).valid();
+            });
+
+            //fechanac beneficio 04
+            $('#Beneficiarios_4__FechaNacimiento').datepicker({
+                language: 'es',
+                startView: "decade"
+
+            }).on('change', function () {
+                $(this).valid();
+            });
+
+            CalcularTotal();
+        });
+
+    </script>
+</body>
+</html>

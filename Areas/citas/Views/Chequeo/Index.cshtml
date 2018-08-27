@@ -1,0 +1,409 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/citas/Views/Shared/_Layout.cshtml";
+}
+
+<section class="row pt-5 pb-5">
+    <div class="col-md-12">
+        <p class="mb-1">
+            Por favor completa los siguientes datos en el formulario para reservar un chequeo preventivo
+        </p>
+        <p class="font-weight-bold">
+            Recuerda que puede agendar su chequeo para el presente mes.
+        </p>
+    </div>
+    <div class="col-md-12 text-agenda-cita pl-10 content-title">
+        <p class="pl-5">
+            <span class="font-weight-bold text-primary">
+                AGENDA
+            </span>
+            TU CHEQUEO Y EL DE TUS DEPENDIENTES
+        </p>
+        <div class="custom-control custom-checkbox m-l-10">
+            @if (ViewBag.istitular == null)
+            {<input type="checkbox" class="custom-control-input" id="customCheck1" name="customCheck1" required="">
+            }
+            else
+            {
+                <input type="checkbox" class="custom-control-input" id="customCheck1" checked name="customCheck1" required="">
+            }
+
+            <label class="custom-control-label text-primary" for="customCheck1">
+                Acepto pasar chequeo como titular</a>
+            </label>
+        </div>
+    </div>
+    <div class="reservar-icon-left rounded-circle content-icon">
+        <img class="rounded-circle" width="100px" height="100px" src="~/img/icons-color/care-7.png" alt="businessman.png">
+    </div>
+    
+    <div class="col-md-12 pt-9 pb-9 small item-round-3 bg-gray-light position-relative content-form">
+        <form class="row text-center justify-content-center form-agenda" action="@Url.Action("Detalle","Chequeo")" method="post" id="frmcobertura">
+            @if (ViewBag.istitular == null)
+            {<input type="hidden" id="istitular" name="istitular" value="0" />
+            }
+            else
+            {
+                <input type="hidden" id="istitular" name="istitular" value="1" />
+            }
+
+
+            @if (ViewBag.cita == null)
+            {
+                <div id="divdependiente" class="row text-center justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Dependientes[0].Nombres" placeholder="Nombres y apellidos" />
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" data-date-end-date="0d" data-val="true" data-val-date="The field FechaNacimiento must be a date." data-val-required="El campo FechaNacimiento es obligatorio." maxlength="10" id="Dependientes[0].f_nacimiento" name="Dependientes[0].f_nacimiento" placeholder="Fecha de nacimiento" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Dependientes[0].Documento" placeholder="Documento de identidad" />
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Dependientes[0].Celular" placeholder="Número de celular" />
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Dependientes[0].Telefonofijo" placeholder="Número de teléfono fijo" />
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Dependientes[0].Email" placeholder="Correo electrónico" />
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <select class="form-control select-round-agenda" id="Dependientes[0].Cobertura" name="Dependientes[0].Cobertura">
+                                <option class="text-primary" value="">Seleccione su cobertura</option>
+                                <option>Pacifico EPS</option>
+                                <option>Pacifico Seguros</option>
+                                <option>Rímac EPS</option>
+                                <option>Rímac Seguros</option>
+                                <option>Mapfre EPS</option>
+                                <option>Mapfre Seguros</option>
+                                <option>Positiva EPS</option>
+                                <option>Particular - Jockey Salud Familia</option>
+                                <option>Particular - Vip para él – S/.780</option>
+                                <option>Particular – Vip para ella – S/. 880</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group" style="display: flex">
+                            <img src="~/img/icons-color/reloj.png" alt="reloj" width="40px" height="40px" style="margin: 0 10px 0 0">
+                            <select class="form-control select-round-agenda" id="Dependientes[0].STRHORAINI" name="Dependientes[0].STRHORAINI" required>
+                                <option class="text-primary" value="">Seleccione la hora</option>
+                                <option>07:30 A.M - 08:00 A.M</option>
+                                <option>08:30 A.M - 09:00 A.M</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5" id="dvfecha">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Dependientes[0].STRFECHA" id="Dependientes[0].STRFECHA" placeholder="Fecha Cita" required />
+                        </div>
+
+                        <span>*Atención de lunes a sábados excepto domingos y feriados</span>
+                    </div>
+                    <div class="col-lg-5" id="dvfechaempty">
+                        <div class="form-group text-center" id="errorcheck">
+                            <p>
+                                <a href="~/Images/Texto_PDP_virtual[1].pdf" target="_blank"> Autorizo el tratamiento de datos personales </a>
+                            </p>
+                            <div class="form-check form-check-inline">
+                                <label class="radio-inline jradio">@Html.RadioButton("opRadioLegal", "SI", false, new { type = "radio", Name = "opRadioLegal", id = "rlsi", required = "" }) SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="radio-inline jradio">@Html.RadioButton("opRadioLegal", "NO", false, new { type = "radio", Name = "opRadioLegal", id = "rlno", required = "" }) NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-round pr-5 pl-5" id="btnsecond">
+                                Siguiente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(ViewBag.cita.StrFecha))
+                {
+                    <div id="divdependiente" class="row text-center justify-content-center istitular">
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@(ViewBag.paciente.VNOMBRE + " " + ViewBag.paciente.VAPEPAT +" ")" class="form-control" name="Dependientes[0].Nombres" placeholder="Nombres y apellidos" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@ViewBag.paciente.DFECNAC" class="form-control" data-date-end-date="0d" data-val="true" data-val-date="The field FechaNacimiento must be a date." data-val-required="El campo FechaNacimiento es obligatorio." maxlength="10" id="Dependientes[0].f_nacimiento" name="Dependientes[0].f_nacimiento" placeholder="Fecha de nacimiento" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@ViewBag.paciente.VNUMDOC" class="form-control" name="Dependientes[0].Documento" placeholder="Documento de identidad" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@ViewBag.paciente.VDESCELULAR" class="form-control" name="Dependientes[0].Celular" placeholder="Número de celular" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@ViewBag.paciente.VDESTELEFONO" class="form-control" name="Dependientes[0].Telefonofijo" placeholder="Número de teléfono fijo" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@ViewBag.paciente.VDESMAIL" class="form-control" name="Dependientes[0].Email" placeholder="Correo electrónico" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <select class="form-control select-round-agenda" id="Dependientes[0].Cobertura" name="Dependientes[0].Cobertura">
+                                    <option class="text-primary" value="">Seleccione su cobertura</option>
+
+                                    <option @(ViewBag.cita.Cobertura.Equals("Pacifico EPS") ? "selected" : "")>Pacifico EPS</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Pacifico Seguros") ? "selected" : "")>Pacifico Seguros</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Rímac EPS") ? "selected" : "")>Rímac EPS</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Rímac Seguros") ? "selected" : "")>Rímac Seguros</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Mapfre EPS") ? "selected" : "")>Mapfre EPS</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Mapfre Seguros") ? "selected" : "")>Mapfre Seguros</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Positiva EPS") ? "selected" : "")>Positiva EPS</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Particular - Jockey Salud Familia") ? "selected" : "")>Particular - Jockey Salud Familia</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Particular - Vip para él – S/.780") ? "selected" : "")>Particular - Vip para él – S/.780</option>
+                                    <option @(ViewBag.cita.Cobertura.Equals("Particular – Vip para ella – S/. 880") ? "selected" : "")>Particular – Vip para ella – S/. 880</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group" style="display: flex">
+                                <img src="~/img/icons-color/reloj.png" alt="reloj" width="40px" height="40px" style="margin: 0 10px 0 0">
+                                <select class="form-control select-round-agenda" id="Dependientes[0].STRHORAINI" name="Dependientes[0].STRHORAINI" required>
+                                    <option class="text-primary" value="">Seleccione la hora</option>
+                                    @if (ViewBag.cita.StrFechaHoraIni.Equals("07:30 A.M - 08:00 A.M"))
+                                    {
+                                        <option selected>07:30 A.M - 08:00 A.M</option>
+                                        <option>08:30 A.M - 09:00 A.M</option>
+                                    }
+                                    else
+                                    {
+                                        <option>07:30 A.M - 08:00 A.M</option>
+                                        <option selected>08:30 A.M - 09:00 A.M</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5" id="dvfecha">
+                            <div class="form-group">
+                                <input type="text" value="@ViewBag.cita.StrFecha" class="form-control" name="Dependientes[0].STRFECHA" id="Dependientes[0].STRFECHA" placeholder="Fecha Cita" required />
+                            </div>
+
+                            <span>*Atención de lunes a sábados excepto domingos y feriados</span>
+                        </div>
+                        <div class="col-lg-5" id="dvfechaempty">
+                            <div class="form-group text-center" id="errorcheck">
+                                <p>
+                                    <a href="~/Images/Texto_PDP_virtual[1].pdf" target="_blank"> Autorizo el tratamiento de datos personales </a>
+                                </p>
+                                <div class="form-check form-check-inline">
+                                    <label class="radio-inline jradio">@Html.RadioButton("opRadioLegal", "SI", false, new { type = "radio", Name = "opRadioLegal", id = "rlsi", required = "" }) SI</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="radio-inline jradio">@Html.RadioButton("opRadioLegal", "NO", false, new { type = "radio", Name = "opRadioLegal", id = "rlno", required = "" }) NO</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-round pr-5 pl-5" id="btnsecond" style="@(ViewBag.cita.Dependientes.Count>0?" display:none;":"")">
+                                    Siguiente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                var number = 1;
+                foreach (var item in ViewBag.cita.Dependientes)
+                {
+
+                    <div id="divdependiente@number" class="row text-center justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@item.Nombres" class="form-control" name="Dependientes[@(number-1)].Nombres" placeholder="Nombres y apellidos" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@item.f_nacimiento" class="form-control" data-date-end-date="0d" data-val="true" data-val-date="The field FechaNacimiento must be a date." data-val-required="El campo FechaNacimiento es obligatorio." maxlength="10" id="Dependientes[@(number-1)].f_nacimiento" name="Dependientes[@(number-1)].f_nacimiento" placeholder="Fecha de nacimiento" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@item.Documento" class="form-control" name="Dependientes[@(number-1)].Documento" placeholder="Documento de identidad" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@item.Celular" class="form-control" name="Dependientes[@(number-1)].Celular" placeholder="Número de celular" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@item.Telefonofijo" class="form-control" name="Dependientes[@(number-1)].Telefonofijo" placeholder="Número de teléfono fijo" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <input type="text" value="@item.Email" class="form-control" name="Dependientes[@(number-1)].Email" placeholder="Correo electrónico" />
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <select class="form-control select-round-agenda" id="Dependientes[0].Cobertura" name="Dependientes[@(number-1)].Cobertura">
+                                    <option class="text-primary" value="">Seleccione su cobertura</option>
+                                    <option @(item.Cobertura.Equals("Pacifico EPS") ? "selected" : "")>Pacifico EPS</option>
+                                    <option @(item.Cobertura.Equals("Pacifico Seguros") ? "selected" : "")>Pacifico Seguros</option>
+                                    <option @(item.Cobertura.Equals("Rímac EPS") ? "selected" : "")>Rímac EPS</option>
+                                    <option @(item.Cobertura.Equals("Rímac Seguros") ? "selected" : "")>Rímac Seguros</option>
+                                    <option @(item.Cobertura.Equals("Mapfre EPS") ? "selected" : "")>Mapfre EPS</option>
+                                    <option @(item.Cobertura.Equals("Mapfre Seguros") ? "selected" : "")>Mapfre Seguros</option>
+                                    <option @(item.Cobertura.Equals("Positiva EPS") ? "selected" : "")>Positiva EPS</option>
+                                    <option @(item.Cobertura.Equals("Particular - Jockey Salud Familia") ? "selected" : "")>Particular - Jockey Salud Familia</option>
+                                    <option @(item.Cobertura.Equals("Particular - Vip para él – S/.780") ? "selected" : "")>Particular - Vip para él – S/.780</option>
+                                    <option @(item.Cobertura.Equals("Particular – Vip para ella – S/. 880") ? "selected" : "")>Particular – Vip para ella – S/. 880</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group" style="display: flex">
+                                <img src="~/img/icons-color/reloj.png" alt="reloj" width="40px" height="40px" style="margin: 0 10px 0 0">
+                                <select class="form-control select-round-agenda" id="Dependientes[@(number-1)].STRHORAINI" name="Dependientes[@(number-1)].STRHORAINI" required>
+                                    <option class="text-primary" value="">Seleccione la hora</option>
+                                    @if (item.STRHORAINI.Equals("07:30 A.M - 08:00 A.M"))
+                                    {
+                                        <option selected>07:30 A.M - 08:00 A.M</option>
+                                        <option>08:30 A.M - 09:00 A.M</option>
+                                    }
+                                    else
+                                    {
+                                        <option>07:30 A.M - 08:00 A.M</option>
+                                        <option selected>08:30 A.M - 09:00 A.M</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5" id="dvfecha">
+                            <div class="form-group">
+                                <input type="text" value="@item.STRFECHA" class="form-control" name="Dependientes[@(number-1)].STRFECHA" id="Dependientes[@((number-1)-1)].STRFECHA" placeholder="Fecha Cita" required />
+                            </div>
+
+                            <span>*Atención de lunes a sábados excepto domingos y feriados</span>
+                        </div>
+                        <div class="col-lg-5" id="dvfechaempty">
+                            <div class="form-group text-center" id="errorcheck">
+                                <p>
+                                    <a href="~/Images/Texto_PDP_virtual[1].pdf" target="_blank"> Autorizo el tratamiento de datos personales </a>
+                                </p>
+                                <div class="form-check form-check-inline">
+                                    <label class="radio-inline jradio">@Html.RadioButton("opRadioLegal", "SI", false, new { type = "radio", Name = "opRadioLegal"+ number.ToString(), id = "rlsi", required = "" }) SI</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="radio-inline jradio">@Html.RadioButton("opRadioLegal", "NO", false, new { type = "radio", Name = "opRadioLegal" + number.ToString(), id = "rlno", required = "" }) NO</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-round pr-5 pl-5" id="btnsecond" style="@(ViewBag.cita.Dependientes.Count!=number?" display:none;":"")">
+                                    Siguiente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    number++;
+                }
+            }
+
+
+
+
+            <div class="col-lg-5">
+                <div class="form-group" id="">
+
+                    <label class="text-primary font-weight-bold" for="cobertura">
+                        Agregar más dependientes
+                    </label>
+                    <a href="#" id="addnew">  <img class="mb-2" src="~/img/icons-color/plus-button.png" title="Añadir"> </a>
+                </div>
+            </div>
+            <div class="col-lg-5"></div>
+
+
+            <!-- Al hacer clic en más dependiente se deben añadir debajo los mismos campos salvo que correría al final el boton de siguiente y agregar más dependientes
+
+            OJO: Los nuevos campos deben empezar en una nueva fila de bootstrap, se puede usar un
+            <div class="col-lg-5"></div> sin contenido para que vuelva a iniciar en una fila. El boton de siguiente y más dependientes siempre debe terminar al lado derecho como en el diseño inicial, ahí si no habría inconvenientes.
+            -->
+
+
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <!-- Jquery, Boostrap and Popper Minified -->
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.es.min.js"></script>
+    <script>
+        var paciente =  $.parseJSON('@Html.Raw(ViewBag.usuario)');
+        /**/
+        $('#f_nacimiento').datepicker({
+            dateFormat: 'dd-MM-yyyy',
+            language: 'es',
+            startView: "decade"
+        });
+
+        $('#datepicker').datepicker({
+            dateFormat: 'dd-MM-yyyy',
+            language: 'es'
+        });
+
+        $('#datepicker').datepicker();
+        $('#datepicker').on('changeDate', function () {
+
+            $('#my_hidden_input').val(
+                $('#datepicker').datepicker('getFormattedDate')
+            );
+        });
+        $('#datepicker').datepicker("setDaysOfWeekDisabled", [0]);
+    </script>
+    <script src="~/js/App/chequeo/index.js?v=@JockeySaludApplication.Utils.Config.versionfiles"></script>
+    <script>
+        if ($("#customCheck1").is(':checked')) {
+            $("#divtitular").fadeIn();
+            $("#istitular").val(1);
+        }
+        else {
+            $("#divtitular").fadeOut();
+            $("#istitular").val(0);
+        }
+        $(document).ready(page.init);
+    </script>
+
+}

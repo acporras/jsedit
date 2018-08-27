@@ -1,0 +1,116 @@
+/* Add your custom css styles */
+.jqtitle{
+	font-style: italic;
+}
+
+select{
+	background-color: #f2f2f2;
+}
+
+.btn-jockeyg{
+	background-color: #EE1C27;
+    border-color: #fff;
+    color: #fff;
+
+}
+
+.btn-jockeyg:hover{
+	color: #00afa2 !important;
+	background-color: #fff;
+}
+
+.ico-list{
+	list-style-image: url('~/images/ico-list.png') !important;
+}
+.jqform{
+	line-height: 18px !important;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.jradio{
+	display: inline !important;
+	text-transform: none !important;
+
+}
+
+.jfradio{
+	margin: 11px;
+}
+
+ 
+input:required:valid {
+ 
+border: 1px solid #00afa2;
+ 
+}
+
+.accordion.color .ac-item .ac-title {
+    background: #00AFA2;
+    color: #fff;
+}
+
+.jqpagologo{
+	margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-compra{
+	background-color: #fbfbfb;
+    border-color: #e3e3e3;
+    border-style: solid;
+    border-width: 1px;
+    padding: 6px;
+    position: relative;
+    text-align: center;
+    color: #c2c2c5;
+}
+
+.btn-jockeygcompra{
+	background-color: #EE1C27;
+    border-color: #fff;
+    color: #fff;
+
+}
+
+.btn-jockeygcompra:hover{
+	color: #fff !important;
+	background-color: #00afa2;
+}
+
+.checkbox-inline+.checkbox-inline, .radio-inline+.radio-inline {
+    margin-left: 5px;
+    padding-left: 30px;
+}
+
+.jqmensaje{
+	margin: 10px 10px 0px 10px;
+}
+
+.btn-primary {
+	background-color: #00afa2;
+    border-color: #00afa2;
+	}
+
+.btn-primary:hover {
+	background-color: #03b5a8;
+    border-color: #03b5a8;
+	}
+
+.jqespacio{
+	margin-bottom: 100px;
+}
+
+.jqbullets{
+	color: #696f6f;
+	text-align: justify;
+	margin-right: 5px;
+    margin-left: 1.6em !important;
+}
+
+.plan-header:hover .jqbullets{
+	color: #fff;
+}

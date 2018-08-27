@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de control - Jockey Salud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Jockey Salud" />
+    <meta name="keywords" content="Jockey Salud" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.min.css">
+
+
+</head>
+
+<body>
+
+    <header class="container-fluid bg-light shadow-2 pb-2 pt-2" id="main-header">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 pt-2 pt-md-1 text-center">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img class="img-fluid" width="250px" src="~/img/logo-linea.png" alt="logo">
+                    </a>
+                </div>
+                <div class="col-md-4 pt-2rem text-center text-md-left">
+                    <p class="h5 mb-0">
+                        <span class="font-weight-bold text-primary">AGENDA</span> TU CITA
+                    </p>
+                </div>
+                <div class="col-md-5 pt-3 pt-lg-4 text-center text-md-right">
+                    <img class="d-inline" width="40px" src="~/img/icons-color/elipse1.png" alt="elipse1.png">
+                    <p class="ml-3 mb-0 d-inline">
+                        Hola,
+                        <span class="text-primary">@Session["nombreUsuario"]</span>
+                    </p>
+                    </br>
+
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- BOXES COLOR -->
+        <section class="row text-white links-white text-center font-weight-bold">
+
+            <div class="col-md-3 pt-5 pb-4 bg-box-color-1">
+                <p>
+                    <a href="@Url.Action("Index", "Home")">
+                        BIENVENIDO
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </a>
+                </p>
+            </div>
+            <div class="col-md-3 pt-5 pb-4 bg-box-color-2">
+                <p>
+                    <a href="@Url.Action("Index", "Cita")">
+                        AGENDAR CITA
+                        <i class="fas fa-chevron-circle-right"></i>
+                    </a>
+                </p>
+            </div>
+            <div class="col-md-3 pt-5 pb-4 bg-box-color-3">
+                <p>
+                    <a href="@Url.Action("Index", "Chequeo")">
+                        AGENDAR CHEQUEO
+                        <i class="fas fa-chevron-circle-right"></i>
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-md-3 pt-5 pb-4 bg-box-color-4">
+                <p>
+                    <a href="#" id="alogout">
+                        CERRAR SESIÓN
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </p>
+            </div>
+
+        </section>
+        <!-- /BOXES COLOR -->
+        <!-- BOX PROFILE -->
+
+        @RenderBody()
+
+        <!-- /BOX PROFILE -->
+    </main>
+    <div class="modal fade" id="modalLogout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-reservar">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <p class="modal-reservar-fondo" style="background: url(@Url.Content("~/img/barra-doctora.png")) no-repeat; background-size: cover; min-height: 80px;">
+                    Salida segura
+                </p>
+                <div class="modal-body pr-7 pl-7 text-center h5">
+                    <p>
+                        Esta seguro de salir de la aplicación?
+                    </p>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+
+                    <a href="@Url.Action("Logout", "Login")" class="btn btn-outline-primary btn-round">
+                        Salir <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <button type="button" class=" btn btn-outline-primary btn-round" data-dismiss="modal" aria-label="Close">
+                        Cancelar <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid bg-primary text-white text-center pt-5 pb-4">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <p class="small text-left links-white">
+                        Jockey Salud Copyright 2018 - Todos los derechos reservados.<br>
+                        Desarrollado por <a target="_blank" href="http://www.cliclatam.com" title="Diseño y desarrollo Web">CLIC Perú</a>
+                    </p>
+                </div>
+
+                <div class="col-md-6 text-right">
+
+
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://www.facebook.com/JockeySalud">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://twitter.com/JockeySalud">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://jockeysalud.wordpress.com/">
+                        <i class="fab fa-wordpress" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- Jquery, Boostrap and Popper Minified -->
+    <script src="~/js/core/core-dist.js"></script>
+    <script src="~/js/App/util.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script>
+        var _appcitas = {};
+        _appcitas.urlapp =@Url.Content("~/");
+        _appcitas.idUsuariocitas =@Session["idUsuariocitas"];
+        _appcitas.IDENTNO =@Session["IDENTNO"];
+        $(document).ready(
+            function () {
+                $("#alogout").click(function () {
+                    $("#modalLogout").modal('show');
+                });
+            });
+    </script>
+    <script>
+
+      
+
+
+        $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+            alert("Se ha producido un error, intente mas tarde.");
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

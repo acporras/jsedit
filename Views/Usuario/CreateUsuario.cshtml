@@ -1,0 +1,230 @@
+﻿@model JockeySaludApplication.Model.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+    <title>Usuario - Microsite Jockey Salud</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/fontawesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="~/vendor/animateit/animate.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" />
+
+    <!-- Vendor css -->
+    <link href="~/vendor/owlcarousel/owl.carousel.css" rel="stylesheet">
+    <link href="~/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- CSS base -->
+    <link href="~/css/theme-base.css" rel="stylesheet">
+
+    <!-- CSS elementos -->
+    <link href="~/css/theme-elements.css" rel="stylesheet">
+
+    <!-- Responsive classes -->
+    <link href="~/css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+            <![endif]-->
+    <!-- LOAD GOOGLE FONTS -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700,600%7CRaleway:100,300,600,700,800" rel="stylesheet" type="text/css" />
+
+    <!-- CSS CUSTOM STYLE -->
+    <link rel="stylesheet" type="text/css" href="~/css/custom.css" media="screen" />
+
+    <!--VENDOR SCRIPT-->
+    <script src="~/vendor/jquery/jquery-1.11.2.min.js"></script>
+    <script src="~/vendor/plugins-compressed.js"></script>
+
+    <script src="~/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/vendor/bootstrap-datepicker-master/locales/bootstrap-datepicker.es.min.js"></script>
+
+    <style type="text/css">
+        #header, #header-wrap, #logo img, #header.header-sticky:not(.header-static) nav#mainMenu ul.main-menu, #mainMenu > ul, #header .side-panel-button {
+            position: inherit;
+        }
+    </style>
+
+</head>
+
+<body class="boxed">
+
+
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <header id="header" class="">
+            <div id="header-wrap">
+                <div class="container">
+                    <!--LOGO-->
+                    <div id="logo">
+                        <a href="~/" class="logo" data-dark-logo="~/images/logo.jpg">
+                            <img src="~/images/logo.jpg" alt="Jockey Salud Express">
+                        </a>
+                    </div>
+                    <!--END: LOGO-->
+                </div>
+            </div>
+        </header>
+        <!-- END: HEADER -->
+        <!-- MENSAJE AFILIATE -->
+        <section class="section-fullwidth text-light no-padding">
+            <div class="row">
+                <div class="col-md-12 text-center" style="background-color: #00AFA2">
+                    <h3>Panel de administración</h3>
+                </div>
+            </div>
+        </section>
+        <!-- END: MENSAJE AFILIATE -->
+        <!--Menu-->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="@Url.Action("Panel", "Usuario")">Panel</a> </li>
+                        <li><a href="#">Crear Usuario</a> </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="@Url.Action("Logout", "Usuario")">Cerrar Sesión</a> </li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!--fin menu -->
+        <!-- Mensaje de Bienvenida  -->
+
+        <section class="jqmensaje">
+            <hgroup>
+                <h4>Bienvenido: @ViewBag.NombreUsuario</h4>
+            </hgroup>
+
+        </section>
+
+        <!-- Fin Mensaje de Bienvenida  -->
+        <!--Default Form-->
+        <section class="jqform">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="plan">
+                            <div class="form-compra">
+                                <h4>Usuario:</h4>
+
+                                <div class="row">
+                                    <form class="form-gray-fields" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <div class="col-sm-6">
+
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.EditorFor(model => model.NombreCompleto, new { htmlAttributes = new { @class = "form-control required", id = "unombre", placeholder = "Nombre completo", aria_required = "true", type = "text" } })
+                                                @Html.ValidationMessageFor(model => model.NombreCompleto, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control required", id = "upassword", placeholder = "Contraseña", aria_required = "true", type = "password" } })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control required", id = "uemail", placeholder = "Email", aria_required = "true", type = "email" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group text-center">
+                                                <button class="btn btn-jockeygcompra" type="submit"><i class="fa fa-plus-circle"></i>&nbsp;CREAR USUARIO</button>
+                                            </div>
+
+                                            <div class="text-right">
+                                                <a href="@Url.Action("Panel", "Usuario")" style="color:#00b09c">Volver a la lista</a>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--END: Default Form-->
+        <div class="hidden-xs">
+            <div class="jqespacio"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="background-jqgreen text-blanco" id="footer">
+            <div class="copyright-content">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="copyright-text text-left">
+                                Jockey Salud Copyright 2016 - Todos los derechos reservados.<br />
+                                <a href="http://www.clic.com.pe" title="Desarrollo y diseño web" target="_blank">Desarrollado por CLIC Perú</a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-md-offset-3">
+                            <div class="row text-right">
+                                <div class="social-icons social-icons-border">
+                                    <ul>
+                                        <li class="social-facebook"><a href="http://www.facebook.com/JockeySalud" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        <li class="social-twitter"><a href="http://www.twitter.com/JockeySalud" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li class="social-wordpress"><a href="http://jockeysalud.wordpress.com/" target="_blank"><i class="fa fa-wordpress"></i></a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </footer>
+        <!-- END: FOOTER -->
+
+    </div>
+    <!-- END: WRAPPER -->
+    <!-- Componentes y Configuración -->
+    <script src="~/js/theme-functions.js"></script>
+
+    <!-- Custom js file -->
+    <script src="~/js/custom.js"></script>
+</body>
+
+</html>

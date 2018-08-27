@@ -1,0 +1,154 @@
+﻿@model DAL.JockeySalud.CitaModel.Cita
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Areas/citas/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BOX BG -->
+<section class="row text-white" style="background: url(@Url.Content("~/img/barra-reservar.png")) no-repeat; background-size: cover; min-height: 120px;">
+
+    <div class="col-md-2 text-center">
+        <img class="img-fluid" src="~/img/reservar/doctora.png" alt="doctora">
+    </div>
+    <div class="col-md-10">
+        <p class="pt-5 h5 text-uppercase text-center">
+            Selecciona el horario de tu cita médica
+        </p>
+    </div>
+
+</section>
+<!-- /BOX BG -->
+<!-- Horarios -->
+<form class="row text-center justify-content-center" action="@Url.Action("Index","Pago")" method="post">
+
+    @Html.HiddenFor(model => model.CITAID)
+    @Html.HiddenFor(model => model.IntCodEspe)
+    @Html.HiddenFor(model => model.StrEspe)
+    @Html.HiddenFor(model => model.Cobertura)
+    @Html.HiddenFor(model => model.StrCodMed)
+    @Html.HiddenFor(model => model.Nombre)
+    @Html.HiddenFor(model => model.ApellidoPat)
+    @Html.HiddenFor(model => model.ApellidoMat)
+    @Html.HiddenFor(model => model.StrFecha)
+    @Html.HiddenFor(model => model.StrFechaHoraIni)
+
+    <section id="horarios" class="row pt-5 pb-5 text-center d-flex justify-content-around">
+
+        <div class="col-md-12 text-left">
+            <p class="mb-2">
+                <span class="font-weight-bold text-primary">DETALLES</span>
+            </p>
+            <p><strong>Especialidad: </strong>@Model.StrEspe</p>
+            <p><strong>Cobertura: </strong>@Model.Cobertura</p>
+            <p><strong>Médico: </strong>@(Model.Nombre + " " + Model.ApellidoPat + " " + Model.ApellidoMat)</p>
+            <p><strong>Fecha: </strong>@Model.StrDia @Model.StrFecha</p>
+
+        </div>
+
+
+        <div class="col-md-12">
+            <p class="mb-5">
+                No olvides <b>seleccionar la hora</b> de tu consulta
+            </p>
+        </div>
+        @{ var index = 0;}
+        @foreach (var item in ViewBag.horarios.getHoras())
+        {
+
+            <div class="col-md-2 col-sm-5 select-horario">
+                <p>
+                    <img class="img-fluid" src="~/img/icons-color/reloj.png" alt="reloj">
+                    <span>@string.Format("{0:hh:mm: tt}", item).ToUpper()</span>
+                    <input type="hidden" id="fechinsel" value="@string.Format("{0:dd/MM/yyyy HH:mm:ss}", item)" />
+                </p>
+            </div>
+
+            if (index == 3)
+            {
+                <div class="w-100"></div>
+                index = 0;
+            }
+            else
+            {
+                index++;
+            }
+
+
+
+        }
+
+
+
+        <div class="col-md-12 text-center mt-5 mb-10">
+            <span id="ltserror"></span>
+            <button type="button" class="btn btn-primary btn-round shadow-2" id="btnRegistrarcita">
+                Confirmar Reserva
+            </button>
+        </div>
+
+    </section>
+    <!-- /Horarios -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-reservar">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h5>
+                    <p class="modal-reservar-fondo" style="background: url(@Url.Content("~/img/barra-doctora.png")) no-repeat; background-size: cover; min-height: 80px;">
+                        ¡ RESERVA CONFIRMADA !
+                    </p>
+                </h5>
+                <div class="modal-body pr-7 pl-7 text-center h5">
+
+                    
+                        <p>
+                            <small class="text-primary">@Session["nombreUsuario"],</small> hemos enviado un correo con la confirmación de tu cita a <b>@Session["VDESMAIL"]</b>
+                        </p>
+
+                        @if (ViewBag.payucitas == "1")
+                        {
+                            <p>
+                                Recuerda que debes realizar el pago máximo 30 minutos antes o
+                                puedes hacerlo vía online siguiendo los siguientes pasos
+                            </p>
+                        }
+                 
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    @if (ViewBag.payucitas == "1")
+                    {
+                        <button type="submit" class="btn btn-outline-primary btn-round">
+                            Realizar pago online <i class="fas fa-arrow-right"></i>
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <!-- /Modal -->
+    <!-- Jquery, Boostrap and Popper Minified -->
+
+    <script src="~/js/App/citas/detalle.js?v=@JockeySaludApplication.Utils.Config.versionfiles"></script>
+    <!-- Bootstrap 4 DatePicker -->
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
+    <script>
+
+
+        //Calendario
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+        $(document).ready(page.init);
+
+    </script>
+    <!-- Slider -->
+    <!-- http://www.landmarkmlp.com/js-plugin/owl.carousel/demos/click.html -->
+}

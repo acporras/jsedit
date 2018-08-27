@@ -1,0 +1,147 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesion - Registro de Usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Jockey Salud" />
+    <meta name="keywords" content="Jockey Salud" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+
+</head>
+
+<body>
+
+    <header class="container-fluid bg-light pt-2 pb-2 shadow-2" id="main-header">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <a href="#">
+                        <img class="img-fluid" width="250px" src="~/img/logo-original.png" alt="logo">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+
+    <main class="container-fluid">
+
+        <!-- SECTION 1 -->
+        <section class="row pt-10 pb-10" style="background: url(@Url.Content("~/img/iniciar-sesion/bg-iniciar.jpg")) no-repeat; background-size: cover; min-height: 850px;">
+
+            <div class="col-md-6 pl-5 pt-md-10 mt-md-10 text-white">
+                <h1 class="font-weight-bold pt-lg-10 mt-lg-10">
+                    AGENDA TU CITA O CHEQUEO MÉDICO
+                    <br><span class="font-weight-normal">EN TAN SOLO UN CLICK </span>
+                </h1>
+                <p class="pt-2 pb-4 h4">
+                    Regístrate y reserva tu consulta con el
+                    <br>
+                    médico de tu preferencia
+                </p>
+            </div>
+
+            <!-- BOX FORM -->
+            <div class="col-md-6">
+
+                <div class="row">
+                    <div class="col-md-7 pt-5 pb-4 bg-light m-auto">
+                        <p class="text-primary font-weight-bold mb-4">
+                            BIENVENIDO
+                        </p>
+                       
+                        <p class="text-danger">
+                            @ViewBag.error
+                        </p>
+                       
+                        <form class="form-iniciar-sesion" action="@Url.Action("Login","Login")" method="post">
+                            <div class="form-group">
+                                <input type="number" class="form-control" name="usuario" id="usuario" placeholder="Numero de Documento" autocomplete="off" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" autocomplete="off" required>
+                            </div>
+
+                            <button type="submit" class="mt-4 btn btn-primary btn-round btn-block font-weight-bold">
+                                INICIAR SESIÓN <i class="fas fa-angle-right"></i>
+                            </button>
+                        </form>
+
+                        <p class="mt-4 mb-0 text-center">
+                            <a href="@Url.Action("RecordarContrasena","Login")" class="text-gray">¿ Olvidaste tu contraseña ?</a>
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-7 pt-4 pb-2 pr-0 pl-0 bg-primary m-auto">
+                        <p class="text-center font-weight-bold links-white">
+                            <a href="@Url.Action("CreateUser","Login")">REGISTRATE AHORA</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- BOX FORM -->
+
+        </section>
+        <!-- /SECTION 1 -->
+
+
+    </main>
+
+    <footer class="container-fluid bg-primary text-white text-center pt-5 pb-4">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <p class="small text-left links-white">
+                        Jockey Salud Copyright 2018 - Todos los derechos reservados.<br>
+                        Desarrollado por <a target="_blank" href="http://www.cliclatam.com" title="Diseño y desarrollo Web">CLIC Perú</a>
+                    </p>
+                </div>
+
+                <div class="col-md-6 text-right">
+
+
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://www.facebook.com/JockeySalud">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://twitter.com/JockeySalud">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-icon btn-outline-light" target="_blank" href="https://jockeysalud.wordpress.com/">
+                        <i class="fab fa-wordpress" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- Jquery, Boostrap and Popper Minified -->
+    <script src="~/js/core/core-dist.js"></script>
+
+</body>
+</html>
+
+
