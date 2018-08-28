@@ -5,9 +5,21 @@
 }
 
 <!-- BOX PROFILE -->
-<section class="row pt-5 pb-5">
+<section class="row pb-5">
 
-    <div class="col-md-12">
+    <div class="col-md-12 text-center d-block d-sm-block d-md-none pt-5 title__content-mobile">
+            <img class="d-inline" width="40px" src="~/img/icons-color/elipse1.png" alt="elipse1.png">
+            <p class="mb-0 d-inline text-center">
+                Hola,
+                <span class="text-primary">@Session["nombreUsuario"]</span>
+            </p>
+
+            <p class="mt-4 mb-1 title__content-mobile">
+                Por favor completa los siguientes datos en el formulario para reservar una cita.
+            </p>
+   </div>
+
+    <div class="col-md-12 pt-5 d-none d-md-block d-lg-block d-xl-block">
         <p class="mb-1">
             Por favor completa los siguientes datos en el formulario para reservar una cita.
         </p>
