@@ -4,8 +4,21 @@
     Layout = "~/Areas/citas/Views/Shared/_Layout.cshtml";
 }
 
-<section class="row pt-5 pb-5">
-    <div class="col-md-12">
+<section class="row pb-5">
+    
+    <div class="col-md-12 text-center d-block d-sm-block d-md-none pt-5 title__content-mobile">
+        <img class="d-inline" width="40px" src="~/img/icons-color/elipse1.png" alt="elipse1.png">
+        <p class="mb-0 d-inline text-center">
+            Hola,
+                <span class="text-primary">@Session["nombreUsuario"]</span>
+        </p>
+
+        <p class="mt-4 mb-2 text-justify title__content-mobile">
+            Por favor completa los siguientes datos en el formulario para reservar un chequeo preventivo
+        </p>
+    </div>
+
+    <div class="col-md-12 pt-5 d-none d-md-block d-lg-block d-xl-block">
         <p class="mb-1">
             Por favor completa los siguientes datos en el formulario para reservar un chequeo preventivo
         </p>
@@ -13,8 +26,19 @@
             Recuerda que puede agendar su chequeo para el presente mes.
         </p>
     </div>
-    <div class="col-md-12 text-agenda-cita pl-10 content-title">
-        <p class="pl-5">
+
+
+    <div class="col-md-12 text-agenda-cita content-title">
+
+        <p class="pb-4 d-block d-sm-block d-md-none text-justify">
+            <span class="font-weight-bold text-primary">
+                AGENDA
+            </span>
+            TU CHEQUEO Y EL DE TUS DEPENDIENTES
+        </p>
+
+        <div class="pl-10">
+        <p class="pl-5 d-none d-md-block d-lg-block d-xl-block">
             <span class="font-weight-bold text-primary">
                 AGENDA
             </span>
@@ -33,7 +57,9 @@
                 Acepto pasar chequeo como titular</a>
             </label>
         </div>
+        </div>
     </div>
+
     <div class="reservar-icon-left rounded-circle content-icon">
         <img class="rounded-circle" width="100px" height="100px" src="~/img/icons-color/care-7.png" alt="businessman.png">
     </div>
