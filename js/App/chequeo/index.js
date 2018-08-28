@@ -12,7 +12,8 @@
             $(this).datepicker({
                 dateFormat: 'dd-MM-yyyy',
                 language: 'es',
-                startView: "decade"
+                startView: "decade",
+                autoclose: true
             });
 
         });
@@ -24,7 +25,8 @@
                 dateFormat: 'dd-MM-yyyy',
                 language: 'es',
                 startDate: new Date(),
-                daysOfWeekDisabled: "0"
+                daysOfWeekDisabled: "0",
+                autoclose: true
             });
            
 
