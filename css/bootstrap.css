@@ -14201,7 +14201,7 @@ a.text-black:hover, a.text-black:focus {
 
 main {
     min-height: 70vh;
-    padding-bottom: 160px;
+    padding-bottom: 130px;
 }
 
 @media (max-width: 1180px) {
